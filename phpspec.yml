@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Caderneta
+        psr4_prefix: Caderneta
+        src_path: app

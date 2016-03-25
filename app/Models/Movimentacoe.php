@@ -11,12 +11,18 @@ class Movimentacoe extends Model implements Transformable
     use TransformableTrait;
 
     protected $fillable = [
+        'user_id',
         'descricao',
         'data',
         'tipoCobranca',
         'tipoPagto',
         'total'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function getTipoPagto()
     {

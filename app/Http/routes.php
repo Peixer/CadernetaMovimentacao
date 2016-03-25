@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('app');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 Route::group(['prefix' => 'client', 'middleware' => 'auth', 'as' => 'client.'], function () {
     Route::get('index', ['as' => 'index', 'uses' => 'MovimentacaoController@index']);
     Route::get('create', ['as' => 'create', 'uses' => 'MovimentacaoController@create']);

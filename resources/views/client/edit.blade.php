@@ -10,7 +10,6 @@
 
         @include('client._form')
 
-
         <a id="parcelas"></a>
 
 
@@ -33,15 +32,14 @@
                 if (value !== undefined) {
 
                     value = parseInt($(this).val(), 10);
-                    alert(value);
 
                     var result = '';
                     for (var i = 0; i < value; i++) {
 
-                        result += "<div class='form-group'> teste </div>"
+                        result += "<div class='form-group'>  <label for='data'>Data: </label> <input class='form-control'' name='data'' type='date'' value='2016-03-20'' id='data'> </div>";
                     }
 
-                    $('#parcelas').innerHTML = result;
+                   // $('#parcelas').html(result);
                 }
             });
         });

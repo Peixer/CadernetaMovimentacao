@@ -4,6 +4,7 @@ namespace Caderneta\Http\Controllers;
 
 use Caderneta\Repositories\MovimentacoeRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use Caderneta\Http\Requests;
 
@@ -24,7 +25,10 @@ class MovimentacaoController extends Controller
      */
     public function index()
     {
-        $movimentacoes = $this->repository->paginate();
+        $userId = Auth::user()->id;
+        $movimentacoes = $this->repository->scopeQuery(function ($query) use ($userId) {
+            return $query->where('user_id', '=', $userId);
+        })->paginate();
 
         return view('client.index', compact('movimentacoes'));
     }
@@ -50,6 +54,9 @@ class MovimentacaoController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $userId = Auth::user()->id;
+        $data['user_id'] = $userId;
+
         $this->repository->create($data);
 
         return redirect()->route('client.index');

@@ -35,12 +35,10 @@
                     var result = '';
                     for (var i = 0; i < value; i++) {
 
-                        result += "teste";
+                        result += "<div class='form-group'>  <label for='data'>Data: </label> <input class='form-control'' name='data'' type='date'' value='2016-03-20'' id='data'> </div>";
                     }
 
-                    alert(result);
-
-                    $('#parcelas').html(result);
+                    //$('#parcelas').html(result);
                 }
 
             });

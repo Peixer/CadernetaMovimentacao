@@ -23,10 +23,8 @@ html, body{
 }
 
 #filtroClass {
-    float: left;
     border-style: solid;
     border-right: thick double #000000;
-    height:1000px;
 }
 
 hr {
@@ -34,11 +32,19 @@ hr {
     border-width: 2px;
 }
 
-.centerSide{
-    width: 900px;
-
+#dataInicio{
+    align-content: center;
 }
 
-#valor{
+#dataFim{
+    align-content: center;
+}
+
+
+.centerSide{
+    width: 900px;
+}
+
+#textValor{
     font-family: Lobster, Monospace;
 }

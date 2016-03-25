@@ -4,17 +4,19 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div id="filtroClass" class="leftSide col-sm-4 col-md-3">
+            <div id="filtroClass" class="col-sm-4 col-md-3">
 
                 <div id="filtro">
                     <h2 class="text-center">Filtro</h2>
-                    <h4>Tipo de Movimentação: <input type="checkbox" id="toggle" checked data-toggle="toggle"
+                    <h4>Tipo de Movimentação: <input class="componenteFiltro" type="checkbox" id="toggle" checked
+                                                     data-toggle="toggle"
                                                      data-on="Débito"
                                                      data-off="Crédito"
                                                      data-onstyle="success" data-offstyle="danger"></h4>
 
-                    <h4>Início: <input type="date" name="bday"></h4>
-                    <h4>Fim: <input type="date" name="bday"></h4>
+                    <h4>Início: <input id="dataInicio" type="date" name="bday"></h4>
+                    <h4>Fim: <input id="dataFim" type="date" name="bday"></h4>
+
                 </div>
 
                 <hr>
@@ -22,13 +24,13 @@
                 <div id="total">
                     <h2 class="text-center">Total</h2>
 
-                    <h1 id="valor" class="text-center">250</h1>
+                    <h1 id="textValor" class="text-center">250</h1>
 
                 </div>
             </div>
-            <div class="col-sm-8 col-md-6 col-lg-7">
+            <div class="col-sm-8 ">
                 <div class="container-fluid">
-                    <h3>Movimentações</h3>
+                    <h3>Movimentos</h3>
 
                     <a href="{{route('client.create')}}" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -48,17 +50,11 @@
                         </thead>
                         <tbody>
                         @foreach($movimentacoes as $movimentacao)
-                            <tr class="itemTable" data-edit="{{$movimentacao->id}}">
-                                <td id="movimentacaoData"
-                                    data-tipo="{{$movimentacao->data}}">{{ $movimentacao->getDateFormated()}}</td>
-
+                            <tr class="itemTable" data-movimentacao="{{$movimentacao}}">
+                                <td>{{ $movimentacao->getDateFormated()}}</td>
                                 <td>{{$movimentacao->descricao}}</td>
-
-                                <td id="movimentacaoTipo"
-                                    data-tipo="{{$movimentacao->tipoCobranca}}">{{$movimentacao->getTipoCobranca()}}</td>
-
-                                <td id="movimentacaoTotal"
-                                    data-price="{{$movimentacao->total}}">{{$movimentacao->total}}</td>
+                                <td>{{$movimentacao->getTipoCobranca()}}</td>
+                                <td>{{$movimentacao->total}}</td>
                                 <td>
                                     <a href="{{ route('client.destroy',['id' =>$movimentacao->id]) }}"
                                        class="btn btn-danger btn-sm">
@@ -88,9 +84,17 @@
                 calculateTotal($(this).prop('checked'));
             });
 
+            $('#dataInicio').change(function () {
+                calculateTotal($(this).prop('checked'));
+            });
+
+            $('#dataFim').change(function () {
+                calculateTotal($(this).prop('checked'));
+            });
+
             $('.itemTable').click(function () {
-                window.location = "{{ URL::to('client/edit/') }}/" + $(this).data('edit');
-            })
+                window.location = "{{ URL::to('client/edit/') }}/" + $(this).data('movimentacao').id;
+            });
         });
 
         function calculateTotal(checked) {
@@ -98,18 +102,22 @@
                 checked = true;
 
             var total = 0;
-            var length = $('table  tbody tr #movimentacaoTotal').length;
+            var length = $('table  tbody tr').length;
             var tr = null;
             var price;
-            var qtd;
 
             for (var i = 0; i < length; i++) {
-                tr = $('table tbody tr #movimentacaoTipo').eq(i);
-                var tipo = tr.data('tipo');
+                tr = $('table tbody .itemTable').eq(i);
 
-                if (checked === Boolean(tipo)) {
-                    tr = $('table tbody tr #movimentacaoTotal').eq(i);
-                    price = parseFloat(tr.data('price'));
+                var movimentacao = tr.data('movimentacao');
+                var tipo = Boolean(parseInt(movimentacao.tipoCobranca));
+                var data = movimentacao.data;
+                var dataInicio = $('#dataInicio').val();
+                var dataFim = $('#dataFim').val();
+
+                if (checked === tipo && deveCalcularItem(data, dataInicio, dataFim)) {
+                    console.log('entrou');
+                    price = parseFloat(movimentacao.total);
 
                     console.log(price);
 
@@ -117,7 +125,18 @@
                 }
             }
 
-            $('#valor').html(total.toFixed(2));
+            $('#textValor').html(total.toFixed(2));
+        }
+
+        function deveCalcularItem(data, dataInicio, dataFim) {
+
+            if (dataInicio !== '' && data < dataInicio)
+                return false;
+
+            if (dataFim !== '' && data > dataFim)
+                return false;
+
+            return true;
         }
 
     </script>

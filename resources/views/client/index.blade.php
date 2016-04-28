@@ -6,27 +6,29 @@
         <div class="row">
             <div id="filtroClass" class="col-sm-4 col-md-3">
 
-                <div id="filtro">
-                    <h2 class="text-center">Filtro</h2>
-                    <h4>Tipo de Movimentação: <input class="componenteFiltro" type="checkbox" id="toggle" checked
-                                                     data-toggle="toggle"
-                                                     data-on="Débito"
-                                                     data-off="Crédito"
-                                                     data-onstyle="success" data-offstyle="danger"></h4>
+                <aside>
+                    <div id="filtro">
+                        <h2 class="text-center">Filtro</h2>
+                        <h4>Tipo de Movimentação: <input class="componenteFiltro" type="checkbox" id="toggle" checked
+                                                         data-toggle="toggle"
+                                                         data-on="Débito"
+                                                         data-off="Crédito"
+                                                         data-onstyle="success" data-offstyle="danger"></h4>
 
-                    <h4>Início: <input id="dataInicio" type="date" name="bday"></h4>
-                    <h4>Fim: <input id="dataFim" type="date" name="bday"></h4>
+                        <h4>Início: <input id="dataInicio" type="date" name="bday"></h4>
+                        <h4>Fim: <input id="dataFim" type="date" name="bday"></h4>
 
-                </div>
+                    </div>
 
-                <hr>
+                    <hr>
 
-                <div id="total">
-                    <h2 class="text-center">Total</h2>
+                    <div id="total">
+                        <h2 class="text-center">Total</h2>
 
-                    <h1 id="textValor" class="text-center">250</h1>
+                        <h1 id="textValor" class="text-center">250</h1>
 
-                </div>
+                    </div>
+                </aside>
             </div>
             <div class="col-sm-8 ">
                 <div class="container-fluid">

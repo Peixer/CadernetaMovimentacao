@@ -1,75 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="app" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Caderneta de Movimentações</title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 
-    <link href="{{ asset('/public/css/movimentacao.css') }}" rel="stylesheet">
-    <link href="{{ asset('/public/bootstrap-toggle/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/semantic/out/semantic.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/movimentacao.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/stylesheet.css') }}" rel="stylesheet">
+    <link href="{{ asset('/bootstrap-toggle/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.OAuth2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.OAuth2/respond.min.js"></script>
-    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 </head>
+
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url('/home') }}">Caderneta</a>
-        </div>
 
-        <div class="collapse navbar-collapse" id="navbar">
-            <ul class="nav navbar-nav">
-                @if(Auth::user())
-                    <li><a href="{{ url(route('client.index')) }}">Movimentos</a></li>
-                @endif
-            </ul>
+<div class="ui grid" ng-controller="appCtrl">
 
-            <ul class="nav navbar-nav navbar-right">
+    <div class="computer tablet only row">
+        <div class="ui inverted fixed menu navbar">
+            <a href="{{ url('/home') }}" class="brand item">Caderneta</a>
+
+            @if(Auth::user())
+                <a href="{{ url(route('client.index')) }}" class="item">Movimentos</a>
+            @endif
+
+            <div class="right menu">
                 @if(auth()->guest())
                     @if(!Request::is('auth/login'))
-                        <li><a href="{{ url('/auth/login') }}">Login</a></li>
+                        <a class="ui item" href="{{ url('/auth/login') }}">Login</a>
                     @endif
                     @if(!Request::is('auth/register'))
-                        <li><a href="{{ url('/auth/register') }}">Registrar</a></li>
+                        <a class="ui item" href="{{ url('/auth/register') }}">Registrar</a>
                     @endif
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
-                        </ul>
-                    </li>
+                    <div class="ui dropdown item">{{auth()->user()->name }}
+                        <i class="dropdown icon"></i>
+
+                        <div class="menu">
+                            <a class="item" href="{{ url('/auth/logout') }}">Logout</a>
+                        </div>
+                    </div>
                 @endif
-            </ul>
+            </div>
         </div>
     </div>
-</nav>
 
-@yield('content')
+    <div class="mobile only row">
+        <div class="ui fixed inverted navbar menu">
+            <div class="left menu open">
+                <a href="" class="menu item">
+                    <i class="content icon"></i>
+                </a>
+            </div>
+        </div>
 
-        <!-- Scripts -->
+        <div class="ui vertical sidebar menu">
+            <a href="" class="active item">Caderneta</a>
+
+            <div class="menu">
+                @if(auth()->guest())
+                    @if(!Request::is('auth/login'))
+                        <a class="ui item" href="{{ url('/auth/login') }}">Login</a>
+                    @endif
+                    @if(!Request::is('auth/register'))
+                        <a class="ui item" href="{{ url('/auth/register') }}">Registrar</a>
+                    @endif
+                @else
+                    <div class="menu">
+                        <a class="item" href="{{ url('/auth/logout') }}">Logout</a>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="ui page grid padding-reset">
+    @yield('content')
+</div>
+
+<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <script src="{{ asset('/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
+<script src="{{ asset('/semantic/out/semantic.min.js')}}"></script>
+<script src="{{ asset('/js/app.js')}}"></script>
 
 @yield('post-script')
 

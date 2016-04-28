@@ -1,6 +1,9 @@
+
 html, body{
     height: 100%;
+    font-family: Lobster, Monospace;
 }
+
 .itemTable:hover {
     background-color: #ccccb3;
     cursor:pointer;
@@ -46,5 +49,5 @@ hr {
 }
 
 #textValor{
-    font-family: Lobster, Monospace;
+    //font-family: BulletoFont;
 }

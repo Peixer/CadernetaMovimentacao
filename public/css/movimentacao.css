@@ -1,15 +1,17 @@
 
-html, body{
+html, body {
     height: 100%;
     font-family: Lobster, Monospace;
+    background: url(img/organized.jpg) no-repeat;
+    background-size: 100% 100%;
 }
 
 .itemTable:hover {
     background-color: #ccccb3;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.itemTable::selection{
+.itemTable::selection {
     background-color: #35DAFA;
 }
 
@@ -18,11 +20,11 @@ html, body{
 }
 
 #filtro {
-    background:#fff;
+    background: #fff;
 }
 
 #total {
-    background:#fff;
+    background: #fff;
 }
 
 #filtroClass {
@@ -35,19 +37,39 @@ hr {
     border-width: 2px;
 }
 
-#dataInicio{
+#dataInicio {
     align-content: center;
 }
 
-#dataFim{
+#dataFim {
     align-content: center;
 }
 
-
-.centerSide{
+.centerSide {
     width: 900px;
 }
 
-#textValor{
-    //font-family: BulletoFont;
+#textValor {
+/ / font-family : BulletoFont;
+}
+
+.painel {
+    padding-top: 30px;
+}
+
+.segmentVantagem {
+    transition-duration: 0.4s;
+}
+
+.segmentVantagem:hover {
+    background-color: #bdbdbd;
+    box-shadow: 0px 5px 5px #000011;
+}
+
+.ui.huge.header.computer {
+    font-size: 10em;
+}
+
+.ui.huge.header.mobile {
+    font-size: 4em;
 }

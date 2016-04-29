@@ -11,5 +11,6 @@ angular.module("app", [])
             });
 
             $('.ui.dropdown').dropdown();
+
         });
     });

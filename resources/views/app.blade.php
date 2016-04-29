@@ -80,10 +80,33 @@
         </div>
     </div>
 
+    <div class="row"></div>
+
+    <div class="row">
+        @yield('content')
+    </div>
 </div>
 
-<div class="ui page grid padding-reset">
-    @yield('content')
+<div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+        <button class="ui circular facebook icon button">
+            <i class="facebook icon"></i>
+        </button>
+        <button class="ui circular twitter icon button">
+            <i class="twitter icon"></i>
+        </button>
+        <button class="ui circular linkedin icon button">
+            <i class="linkedin icon"></i>
+        </button>
+        <button class="ui circular google plus icon button">
+            <i class="google plus icon"></i>
+        </button>
+        <div class="ui inverted section divider"></div>
+
+        <div class="ui center aligned sizer vertical segment">
+            <h2 class="ui small header teal">Desenvolvido e projetado por Glaicon José Peixer</h2>
+        </div>
+    </div>
 </div>
 
 <!-- Scripts -->
@@ -95,7 +118,5 @@
 
 @yield('post-script')
 
-<br>
-<br>
 </body>
 </html>

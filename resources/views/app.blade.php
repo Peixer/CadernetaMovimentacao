@@ -18,16 +18,61 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 </head>
 
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '1721225824819950',
+            xfbml: true,
+            version: 'v2.6'
+        });
+
+        function onLogin(response) {
+            if (response.status == 'connected') {
+                FB.api('/me?fields=first_name', function (data) {
+                    var welcomeBlock = document.getElementById('fb-welcome');
+                    welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+                });
+            }
+        }
+
+        FB.getLoginStatus(function (response) {
+            // Check login status on load, and if the user is
+            // already logged in, go directly to the welcome message.
+            if (response.status == 'connected') {
+                onLogin(response);
+            } else {
+                // Otherwise, show Login dialog first.
+                FB.login(function (response) {
+                    onLogin(response);
+                }, {scope: 'user_friends, email'});
+            }
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <body>
 
 <div class="ui grid" ng-controller="appCtrl">
 
     <div class="computer tablet only row">
         <div class="ui inverted fixed menu navbar">
-            <a href="{{ url('/home') }}" class="brand item">Caderneta</a>
+            <a href="{{ url('/home') }}" class="brand item">Caderneta.Online </a>
 
             @if(Auth::user())
-                <a href="{{ url(route('client.index')) }}" class="item">Movimentos</a>
+                <a href="{{ url(route('client.index')) }}" class="item"><i class="book icon"></i>Movimentos</a>
+                <a href="#" class="item"><i class="line chart icon"></i>Histórico</a>
+                <a href="#" class="item"><i class="pie chart icon"></i>Relatório</a>
             @endif
 
             <div class="right menu">
@@ -61,7 +106,16 @@
         </div>
 
         <div class="ui vertical sidebar menu">
-            <a href="" class="active item">Caderneta</a>
+            <a href="{{ url('/home') }}" class="active item">Caderneta.Online</a>
+
+            @if(Auth::user())
+                <a href="{{ url(route('client.index')) }}" class="item">
+                    <i class="book icon"></i>Movimentos</a>
+                <a href="#" class="item">
+                    <i class="line chart icon"></i>Histórico</a>
+                <a href="#" class="item">
+                    <i class="pie chart icon"></i>Relatório</a>
+            @endif
 
             <div class="menu">
                 @if(auth()->guest())
@@ -85,11 +139,13 @@
     <div class="row">
         @yield('content')
     </div>
+    <div class="row painel"></div>
 </div>
 
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
-        <button class="ui circular facebook icon button">
+        <button class="ui circular facebook icon button"
+                onclick="window.open('https://apps.facebook.com/caderneta/?fb_source=search')">
             <i class="facebook icon"></i>
         </button>
         <button class="ui circular twitter icon button">

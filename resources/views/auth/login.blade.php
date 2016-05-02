@@ -1,61 +1,102 @@
 @extends('app')
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-heading">Login</div>
-					<div class="panel-body">
-						@if (count($errors) > 0)
-							<div class="alert alert-danger">
-								<strong>Whoops!</strong> Existe algum problema com seus dados.<br><br>
-								<ul>
-									@foreach ($errors->all() as $error)
-										<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-						@endif
 
-						<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
-							{!! csrf_field() !!}
+    <div id="login" class="sixteen wide centered column" ng-controller="loginCtrl">
 
-							<div class="form-group">
-								<label class="col-md-4 control-label">Endereço de E-Mail</label>
-								<div class="col-md-6">
-									<input type="email" class="form-control" placeholder="Digite seu email" name="email" value="{{ old('email') }}">
-								</div>
-							</div>
+        <div class="ui grid">
+            <div class="computer only row">
+                <div class="six wide centered column">
+                    <div class="ui center aligned container">
 
-							<div class="form-group">
-								<label class="col-md-4 control-label">Senha</label>
-								<div class="col-md-6">
-									<input type="password" class="form-control" placeholder="Digite sua senha" name="password">
-								</div>
-							</div>
+                        <button class="ui fluid large facebook button">
+                            <i class="facebook icon"></i>
+                            Facebook
+                        </button>
 
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" name="remember">Lembre de mim
-										</label>
-									</div>
-								</div>
-							</div>
+                        <div class="ui horizontal divider">
+                            Ou
+                        </div>
 
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">Entrar</button>
+                        <form class="ui form" role="form" method="POST" action="{{ url('/auth/login') }}">
+                            {!! csrf_field() !!}
+                            <div class="ui stacked segment">
+                                <div class="field">
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" name="email" placeholder="Digite seu e-mail">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui left icon input">
+                                        <i class="lock icon"></i>
+                                        <input type="password" name="password"
+                                               placeholder="Digite sua senha">
+                                    </div>
+                                </div>
+                                <div class="ui fluid large teal submit button">Entrar</div>
+                            </div>
 
-									<a class="btn btn-link" href="{{ url('/password/email') }}">Esqueceu sua senha?</a>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <div class="ui error message"></div>
+                        </form>
+
+                        <div class="ui message">
+                            Você é novo por aqui? <a href="{{ url('/auth/register') }}">Registrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile tablet only row">
+                <div class="sixteen wide centered column">
+
+                    <div class="ui center aligned container">
+
+                        <button class="ui fluid large facebook button">
+                            <i class="facebook icon"></i>
+                            Facebook
+                        </button>
+
+                        <div class="ui horizontal divider">
+                            Ou
+                        </div>
+
+                        <form class="ui form" role="form" method="POST" action="{{ url('/auth/login') }}">
+                            {!! csrf_field() !!}
+                            <div class="ui stacked segment">
+                                <div class="field">
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" name="email" placeholder="Digite seu e-mail">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui left icon input">
+                                        <i class="lock icon"></i>
+                                        <input type="password" name="password"
+                                               placeholder="Digite sua senha">
+                                    </div>
+                                </div>
+                                <div class="ui fluid large teal submit button">Entrar</div>
+                            </div>
+
+                            <div class="ui error message"></div>
+                        </form>
+
+                        <div class="ui message">
+                            Você é novo por aqui? <a href="#/register">Registrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--
+    {{ url('/auth/register') }}
+            <a class="btn btn-link" href="{{ url('/password/email') }}">Esqueceu sua senha?</a>
+-->
+
 @endsection

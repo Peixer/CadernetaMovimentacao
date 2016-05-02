@@ -28,7 +28,7 @@ class MovimentacaoController extends Controller
         $userId = Auth::user()->id;
         $movimentacoes = $this->repository->scopeQuery(function ($query) use ($userId) {
             return $query->where('user_id', '=', $userId);
-        })->paginate();
+        })->paginate(10);
 
         return view('client.index', compact('movimentacoes'));
     }

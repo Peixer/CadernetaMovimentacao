@@ -55,10 +55,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row painel"></div>
-
     </div>
-
 
 @endsection

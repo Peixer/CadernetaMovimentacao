@@ -22,10 +22,11 @@ $factory->define(Caderneta\Models\User::class, function (Faker\Generator $faker)
 
 $factory->define(Caderneta\Models\Movimentacoe::class, function (Faker\Generator $faker) {
     return [
-        'descricao' => $faker->paragraph,
+        'descricao' => $faker->word,
         'data' => $faker->dateTime,
         'tipoCobranca' => $faker->boolean(),
         'tipoPagto' => $faker->numberBetween(0, 2),
         'total' => $faker->randomFloat(),
+        'user_id' => 1
     ];
 });

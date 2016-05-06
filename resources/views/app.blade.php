@@ -18,49 +18,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 </head>
 
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '1721225824819950',
-            xfbml: true,
-            version: 'v2.6'
-        });
-
-        function onLogin(response) {
-            if (response.status == 'connected') {
-                FB.api('/me?fields=first_name', function (data) {
-                    var welcomeBlock = document.getElementById('fb-welcome');
-                    welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-                });
-            }
-        }
-
-        FB.getLoginStatus(function (response) {
-            // Check login status on load, and if the user is
-            // already logged in, go directly to the welcome message.
-            if (response.status == 'connected') {
-                onLogin(response);
-            } else {
-                // Otherwise, show Login dialog first.
-                FB.login(function (response) {
-                    onLogin(response);
-                }, {scope: 'user_friends, email'});
-            }
-        });
-    };
-
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
 <body>
 
 <div class="ui grid" ng-controller="appCtrl">
@@ -71,7 +28,7 @@
 
             @if(Auth::user())
                 <a href="{{ url(route('client.index')) }}" class="item"><i class="book icon"></i>Movimentos</a>
-                <a href="#" class="item"><i class="line chart icon"></i>Histórico</a>
+                <a href="{{ url(route('client.historic')) }}" class="item"><i class="line chart icon"></i>Histórico</a>
                 <a href="#" class="item"><i class="pie chart icon"></i>Relatório</a>
             @endif
 
@@ -111,7 +68,7 @@
             @if(Auth::user())
                 <a href="{{ url(route('client.index')) }}" class="item">
                     <i class="book icon"></i>Movimentos</a>
-                <a href="#" class="item">
+                <a href="{{ url(route('client.historic')) }}" class="item">
                     <i class="line chart icon"></i>Histórico</a>
                 <a href="#" class="item">
                     <i class="pie chart icon"></i>Relatório</a>
@@ -168,9 +125,12 @@
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<script src="{{ asset('/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
-<script src="{{ asset('/semantic/out/semantic.min.js')}}"></script>
-<script src="{{ asset('/js/app.js')}}"></script>
+<script src="{{ asset('/bootstrap-toggle/js/bootstrap-toggle.min.js') }} "></script>
+<script src="{{ asset('/semantic/out/semantic.min.js') }} "></script>
+<script src="{{ asset('/js/app.js') }} "></script>
+<script src="{{ asset('/js/facebook.js') }} "></script>
+<script src="{{ asset('/chart/dist/Chart.min.js') }}"></script>
+<script src="{{ asset('/angular-resource/angular-resource.min.js') }}"></script>
 
 @yield('post-script')
 

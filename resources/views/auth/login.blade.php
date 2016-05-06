@@ -9,7 +9,7 @@
                 <div class="six wide centered column">
                     <div class="ui center aligned container">
 
-                        <button class="ui fluid large facebook button">
+                        <button class="ui fluid large facebook button" ng-click="logarFacebook()">
                             <i class="facebook icon"></i>
                             Facebook
                         </button>

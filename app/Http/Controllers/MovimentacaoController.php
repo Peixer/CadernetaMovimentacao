@@ -103,4 +103,19 @@ class MovimentacaoController extends Controller
 
         return redirect()->route('client.index');
     }
+
+    public function historic()
+    {
+        $userId = Auth::user()->id;
+
+        $movimentacoes = $this->repository->findByField('user_id', $userId);
+        return view('client.historic.index', compact('movimentacoes'));
+    }
+
+    public function getHistoric($mes)
+    {
+        $userId = Auth::user()->id;
+
+        return $this->repository->getHistoric($userId, $mes);
+    }
 }

@@ -23,6 +23,22 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
         return Movimentacoe::class;
     }
 
+    public function getHistoric($id, $mes)
+    {
+        $result = [];
+
+        $movimentacoes = $this->model->where('user_id', $id)->get();
+
+        foreach ($movimentacoes as $movimento) {
+            $month = date("m", strtotime($movimento->data));
+
+            if ($month == $mes) {
+                array_push($result, $movimento);
+            }
+        }
+
+        return $result;
+    }
 
     /**
      * Boot up the repository, pushing criteria

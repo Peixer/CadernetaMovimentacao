@@ -26,4 +26,8 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth', 'as' => 'client.'], 
     Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'MovimentacaoController@edit']);
     Route::post('update/{id}', ['as' => 'update', 'uses' => 'MovimentacaoController@update']);
     Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'MovimentacaoController@destroy']);
+
+    Route::get('historic', ['as' => 'historic', 'uses' => 'MovimentacaoController@historic']);
+
+    Route::get('filterHistoric/{mes}', ['as' => 'filterHistoric', 'uses' => 'MovimentacaoController@getHistoric']);
 });

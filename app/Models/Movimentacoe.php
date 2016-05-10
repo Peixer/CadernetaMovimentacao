@@ -10,6 +10,8 @@ class Movimentacoe extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table = 'movimentacoes';
+
     protected $fillable = [
         'user_id',
         'descricao',

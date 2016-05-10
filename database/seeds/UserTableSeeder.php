@@ -19,6 +19,7 @@ class UserTableSeeder extends Seeder
             'email' => "gjpeixer@hotmail.com",
             'password' => bcrypt(123),
             'remember_token' => str_random(10),
+            'facebook_id' => 'teste'
         ]);
     }
 }

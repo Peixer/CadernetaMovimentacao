@@ -19,6 +19,11 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
+    Route::get('facebook', 'Auth\AuthController@redirectToProvider');
+    Route::get('facebook/callback', 'Auth\AuthController@handleProviderCallback');
+});
+
 Route::group(['prefix' => 'client', 'middleware' => 'auth', 'as' => 'client.'], function () {
     Route::get('index', ['as' => 'index', 'uses' => 'MovimentacaoController@index']);
     Route::get('create', ['as' => 'create', 'uses' => 'MovimentacaoController@create']);

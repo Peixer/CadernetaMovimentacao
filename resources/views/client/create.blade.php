@@ -1,22 +1,24 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
-        <h2 class="text-center"> Novo Movimento</h2>
 
-        @include('errors._check')
+    <div class="sixteen wide centered column">
 
-        {!! Form::open(['route'=>'client.store']) !!}
+        <div class="ui center aligned container">
 
-        @include('client._form')
+            <h2 class="text-center"> Novo Movimento</h2>
 
-        <h1 id="parcelas"></h1>
+            @include('errors._check')
 
-        <div class="form-group">
-            {!! Form::submit('Criar movimento',['class'=>'btn btn-primary btn-block']) !!}
+            {!! SemanticForm::open()->post()->action(route('client.store')) !!}
+
+            @include('client._form')
+
+            {!! SemanticForm::submit('Criar movimento') !!}
+
+            {!! SemanticForm::close() !!}
+
         </div>
-
-        {!! Form::close() !!}
     </div>
 
 @endsection()

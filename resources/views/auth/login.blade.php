@@ -9,7 +9,7 @@
                 <div class="six wide centered column">
                     <div class="ui center aligned container">
 
-                        <button class="ui fluid large facebook button" ng-click="logarFacebook()">
+                        <button class="ui fluid large facebook button">
                             <i class="facebook icon"></i>
                             Facebook
                         </button>
@@ -99,4 +99,14 @@
             <a class="btn btn-link" href="{{ url('/password/email') }}">Esqueceu sua senha?</a>
 -->
 
+@endsection
+
+@section('post-script')
+    <script>
+        $(document).ready(function () {
+            $('.facebook.button').click(function () {
+                window.location = "{{ URL::to('auth/facebook') }}";
+            });
+        });
+    </script>
 @endsection

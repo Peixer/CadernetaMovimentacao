@@ -1,17 +1,16 @@
 /**
  * Created by Glaicon on 28/04/2016.
  */
-angular.module("app", ['ngResource'])
+angular.module('app', ['ngResource'])
     .constant('appConfig', {
         baseUrl: 'http://localhost:8000'
+        // baseUrl: 'http://caderneta.peixer.com'
     })
     .controller("appCtrl", function () {
         $(document).ready(function () {
             $('.left.menu.open').on("click", function (e) {
                 e.preventDefault();
-
                 $('.ui.vertical.sidebar').sidebar('toggle');
-
             });
 
             $('.ui.dropdown').dropdown();
@@ -42,10 +41,6 @@ angular.module("app", ['ngResource'])
                                 {
                                     type: 'empty',
                                     prompt: 'Por favor digite a sua senha'
-                                },
-                                {
-                                    type: 'length[6]',
-                                    prompt: 'Sua senha deve ter pelo menos 6 caracteres'
                                 }
                             ]
                         }
@@ -57,6 +52,8 @@ angular.module("app", ['ngResource'])
 
         $scope.months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
             'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+        var myChart = null;
 
         function getHistoric(month) {
             return HistoricFactory.query({
@@ -119,49 +116,54 @@ angular.module("app", ['ngResource'])
 
                 var ctx = document.getElementById("canvas").getContext("2d");
 
-                new Chart.Line(ctx, {
-                    data: {
-                        labels: days,
-                        datasets: [{
-                            label: 'Fluxo',
-                            backgroundColor: "rgba(75,192,192,0.4)",
-                            borderColor: "rgba(75,192,192,1)",
-                            data: data,
-                            fill: false,
-                            lineTension: 0.1,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        title: {
-                            display: true,
-                            text: 'Fluxo de caixa - Mensal'
-                        },
-                        scales: {
-                            xAxes: [{
-                                display: true,
-                                scaleLabel: {
-                                    show: true,
-                                    labelString: 'Day'
-                                }
-                            }],
-                            yAxes: [{
-                                display: true,
-                                scaleLabel: {
-                                    show: true,
-                                    labelString: 'Money'
-                                },
-                                ticks: {
-                                    suggestedMin: 0,
-                                    suggestedMax: 30,
-                                }
+                if (!myChart)
+                    myChart = new Chart.Line(ctx, {
+                        data: {
+                            labels: days,
+                            datasets: [{
+                                label: 'Fluxo',
+                                backgroundColor: "rgba(75,192,192,0.4)",
+                                borderColor: "rgba(75,192,192,1)",
+                                data: data,
+                                fill: false,
+                                lineTension: 0.1,
                             }]
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Fluxo de caixa - Mensal'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        show: true,
+                                        labelString: 'Day'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        show: true,
+                                        labelString: 'Money'
+                                    },
+                                    ticks: {
+                                        suggestedMin: 0,
+                                        suggestedMax: 30,
+                                    }
+                                }]
+                            }
                         }
-                    }
-                });
+                    });
+                else {
+                    myChart.data.labels = days;
+                    myChart.data.datasets[0].data = data;
+                    myChart.update();
+                }
             });
         }
-
 
         $(document).ready(function () {
 

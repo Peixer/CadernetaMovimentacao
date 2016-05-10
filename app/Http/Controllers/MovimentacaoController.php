@@ -106,10 +106,7 @@ class MovimentacaoController extends Controller
 
     public function historic()
     {
-        $userId = Auth::user()->id;
-
-        $movimentacoes = $this->repository->findByField('user_id', $userId);
-        return view('client.historic.index', compact('movimentacoes'));
+        return view('client.historic.index');
     }
 
     public function getHistoric($mes)

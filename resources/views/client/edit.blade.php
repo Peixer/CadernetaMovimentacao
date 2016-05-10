@@ -1,24 +1,34 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
-        <h3 class="text-center">Editando: {{$movimento->descricao}}</h3>
+    <div class="sixteen wide centered column">
 
-        @include('errors._check')
+        <div class="ui center aligned container">
+            <h3 class="text-center">Editando: {{$movimento->descricao}}</h3>
 
-        {!! Form::model($movimento, ['route'=>['client.update',$movimento->id]]) !!}
+            @include('errors._check')
 
-        @include('client._form')
+            {!! SemanticForm::open()->post()->action(route('client.update',$movimento->id)) !!}
 
-        <a id="parcelas"></a>
+            {!! SemanticForm::bind($movimento) !!}
 
+            @include('client._form')
 
-        <div class="form-group">
-            {!! Form::submit('Alterar movimento',['class'=>'btn btn-primary btn-block']) !!}
+            {!! SemanticForm::submit('Alterar movimento') !!}
+
+            {!! SemanticForm::close() !!}
         </div>
 
-        {!! Form::close() !!}
+
+        <div class="row espacamentoMedio"></div>
+
+        <div class="row espacamentoMedio"></div>
+
+        <div class="row espacamentoMedio"></div>
+
+        <div class="row painel"></div>
     </div>
+
 
 @endsection()
 
@@ -39,7 +49,7 @@
                         result += "<div class='form-group'>  <label for='data'>Data: </label> <input class='form-control'' name='data'' type='date'' value='2016-03-20'' id='data'> </div>";
                     }
 
-                   // $('#parcelas').html(result);
+                    // $('#parcelas').html(result);
                 }
             });
         });

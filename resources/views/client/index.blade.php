@@ -3,9 +3,28 @@
 @section('content')
 
     <div class="sixteen wide centered column">
-
         <div class="ui center aligned container">
-            <table class="ui selectable celled center aligned table green">
+
+            <div class="ui grid">
+                <div class="computer tablet only row">
+                    <div class="sixteen wide centered column">
+                        <button class="positive left floated ui labeled icon button">
+                            <i class="add user icon"></i>
+                            Criar Novo Movimento
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mobile only row">
+                    <div class="sixteen wide centered column">
+                        <button class="positive fluid ui button">Criar Novo Movimento
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <table class=" ui selectable celled center aligned table green
+                        ">
                 <thead>
                 <tr>
                     <th>Início</th>
@@ -48,8 +67,10 @@
             $('.itemTable').click(function () {
                 window.location = "{{ URL::to('client/edit/') }}/" + $(this).data('movimentacao').id;
             });
+
+            $('.button').click(function () {
+                window.location = "{{ URL::to('client/create') }}";
+            });
         });
     </script>
-
-
 @endsection

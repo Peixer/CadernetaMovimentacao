@@ -1,53 +1,18 @@
 
 html, body {
     font-family: Lobster, Monospace;
-    background-color: #DADADA;
 }
 
 .itemTable:hover {
     cursor: pointer;
 }
 
-.itemTable::selection {
-    background-color: #35DAFA;
-}
-
 .itemTable {
     transition-duration: 0.4s;
 }
 
-#filtro {
-    background: #fff;
-}
-
-#total {
-    background: #fff;
-}
-
-#filtroClass {
-    border-style: solid;
-    border-right: thick double #000000;
-}
-
-hr {
-    border-color: #000000;
-    border-width: 2px;
-}
-
-#dataInicio {
-    align-content: center;
-}
-
-#dataFim {
-    align-content: center;
-}
-
 .centerSide {
     width: 900px;
-}
-
-#textValor {
-    font-family: BulletoFont;
 }
 
 .painel {
@@ -79,6 +44,10 @@ hr {
     #login {
         padding-top: 90px;
     }
+
+    .espacamentoMedio{
+        padding-top: 77px;
+    }
 }
 
 @media screen and (min-height: 600px) and (max-height: 899px) {
@@ -88,6 +57,10 @@ hr {
 
     #login {
         padding-top: 90px;
+    }
+
+    .espacamentoMedio{
+        padding-top: 40px;
     }
 }
 

@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div id="movimentacoes" class="ui center aligned container" data-movimentacao="{{$movimentacoes}}">
+        <div id="movimentacoes" class="ui center aligned container">
             <canvas id="canvas"></canvas>
         </div>
     </div>

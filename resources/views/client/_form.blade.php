@@ -1,25 +1,10 @@
-<div class="form-group">
-    {!! Form::label('data','Data de Início:') !!}
-    {!! Form::date('data', null,['class'=>'form-control']) !!}
-</div>
+{!!SemanticForm::date('data')->label('Data de Início') !!}
 
-<div class="form-group">
-    {!! Form::label('Description','Descrição:') !!}
-    {!! Form::text('descricao', null,['class'=>'form-control']) !!}
-</div>
+{!! SemanticForm::text('descricao')->label('Descrição') !!}
 
-<div class="form-group">
-    {!! Form::label('tipoCobranca','Tipo Movimento:') !!}
-    {!! Form::select('tipoCobranca', $opcoes, null, ['class'=>'form-control']) !!}
-</div>
+{!! SemanticForm::select('tipoCobranca', $opcoes)->label('Tipo Movimento') !!}
 
-<div class="form-group">
-    {!! Form::label('tipoPagto','Forma de Pagamento:') !!}
-    {!! Form::number('tipoPagto', null, ['class'=>'form-control', 'min' => 1, 'max'=> 360]) !!}
-</div>
+{!! SemanticForm::selectRange('tipoPagto', 1,  360)->label('Forma de Pagamento') !!}
 
-<div class="form-group">
-    {!! Form::label('total','Total:') !!}
-    {!! Form::number('total', null,['class'=>'form-control']) !!}
-</div>
+{!! SemanticForm::text('total')->label('Total') !!}
 

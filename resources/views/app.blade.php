@@ -10,16 +10,14 @@
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 
+    <link href="{{ asset('/css/movimentacao.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/semantic/out/semantic.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/movimentacao.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/stylesheet.css') }}" rel="stylesheet">
-    <link href="{{ asset('/bootstrap-toggle/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 </head>
 
 <body>
-
 <div class="ui grid" ng-controller="appCtrl">
 
     <div class="computer tablet only row">
@@ -125,7 +123,7 @@
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<script src="{{ asset('/bootstrap-toggle/js/bootstrap-toggle.min.js') }} "></script>
+<!-- Servidor adicionar /public -->
 <script src="{{ asset('/semantic/out/semantic.min.js') }} "></script>
 <script src="{{ asset('/js/app.js') }} "></script>
 <script src="{{ asset('/js/facebook.js') }} "></script>

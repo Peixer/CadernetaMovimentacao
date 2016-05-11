@@ -33,7 +33,7 @@
             <div class="right menu">
                 @if(auth()->guest())
                     @if(!Request::is('auth/login'))
-                        <a class="ui item" href="{{ url('/auth/login') }}">Login</a>
+                        <a class="ui item" href="{{ url('/auth/login') }}">Entrar</a>
                     @endif
                     @if(!Request::is('auth/register'))
                         <a class="ui item" href="{{ url('/auth/register') }}">Registrar</a>
@@ -43,7 +43,7 @@
                         <i class="dropdown icon"></i>
 
                         <div class="menu">
-                            <a class="item" href="{{ url('/auth/logout') }}">Logout</a>
+                            <a class="item" href="{{ url('/auth/logout') }}">Sair</a>
                         </div>
                     </div>
                 @endif
@@ -75,14 +75,14 @@
             <div class="menu">
                 @if(auth()->guest())
                     @if(!Request::is('auth/login'))
-                        <a class="ui item" href="{{ url('/auth/login') }}">Login</a>
+                        <a class="ui item" href="{{ url('/auth/login') }}">Entrar</a>
                     @endif
                     @if(!Request::is('auth/register'))
                         <a class="ui item" href="{{ url('/auth/register') }}">Registrar</a>
                     @endif
                 @else
                     <div class="menu">
-                        <a class="item" href="{{ url('/auth/logout') }}">Logout</a>
+                        <a class="item" href="{{ url('/auth/logout') }}">Sair</a>
                     </div>
                 @endif
             </div>
@@ -126,7 +126,6 @@
 <!-- Servidor adicionar /public -->
 <script src="{{ asset('/semantic/out/semantic.min.js') }} "></script>
 <script src="{{ asset('/js/app.js') }} "></script>
-<script src="{{ asset('/js/facebook.js') }} "></script>
 <script src="{{ asset('/chart/dist/Chart.min.js') }}"></script>
 <script src="{{ asset('/angular-resource/angular-resource.min.js') }}"></script>
 

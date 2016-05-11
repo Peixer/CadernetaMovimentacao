@@ -48,6 +48,55 @@ angular.module('app', ['ngResource'])
                 });
         });
     })
+    .controller('registerCtrl', function () {
+        $(document).ready(function () {
+            $('.ui.form')
+                .form({
+                    fields: {
+                        email: {
+                            identifier: 'email',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Por favor digite seu e-mail'
+                                },
+                                {
+                                    type: 'email',
+                                    prompt: 'Por favor digite um e-mail válido'
+                                }
+                            ]
+                        },
+                        password: {
+                            identifier: 'password',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Por favor digite a sua senha'
+                                }
+                            ]
+                        },
+                        name: {
+                            identifier: 'name',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Por favor digite o seu nome'
+                                }
+                            ]
+                        },
+                        password_confirmation: {
+                            identifier: 'password_confirmation',
+                            rules: [
+                                {
+                                    type: 'match[password]',
+                                    prompt: 'As senhas não são iguais'
+                                }
+                            ]
+                        }
+                    }
+                });
+        });
+    })
     .controller('historicCtrl', function ($scope, HistoricFactory) {
 
         $scope.months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',

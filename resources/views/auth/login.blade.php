@@ -9,6 +9,8 @@
                 <div class="six wide centered column">
                     <div class="ui center aligned container">
 
+                        <h2 class="text-center">Entrar</h2>
+
                         <button class="ui fluid large facebook button">
                             <i class="facebook icon"></i>
                             Facebook
@@ -23,7 +25,7 @@
                             <div class="ui stacked segment">
                                 <div class="field">
                                     <div class="ui left icon input">
-                                        <i class="user icon"></i>
+                                        <i class="mail outline icon"></i>
                                         <input type="text" name="email" placeholder="Digite seu e-mail">
                                     </div>
                                 </div>
@@ -49,8 +51,9 @@
 
             <div class="mobile tablet only row">
                 <div class="sixteen wide centered column">
-
                     <div class="ui center aligned container">
+
+                        <h2 class="text-center">Entrar</h2>
 
                         <button class="ui fluid large facebook button">
                             <i class="facebook icon"></i>
@@ -66,7 +69,7 @@
                             <div class="ui stacked segment">
                                 <div class="field">
                                     <div class="ui left icon input">
-                                        <i class="user icon"></i>
+                                        <i class="mail outline icon"></i>
                                         <input type="text" name="email" placeholder="Digite seu e-mail">
                                     </div>
                                 </div>
@@ -91,14 +94,14 @@
             </div>
         </div>
 
+        <div class="row espacamentoMedio"></div>
+
+        <div class="row espacamentoMedio"></div>
+
+        <div class="row espacamentoMedio"></div>
+
+        <div class="row painel"></div>
     </div>
-
-
-    <!--
-    {{ url('/auth/register') }}
-            <a class="btn btn-link" href="{{ url('/password/email') }}">Esqueceu sua senha?</a>
--->
-
 @endsection
 
 @section('post-script')

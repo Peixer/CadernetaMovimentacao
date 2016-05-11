@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/home', function () {
+Route::get('/home', ['as' => 'home', function () {
     return view('home');
-});
+}]);
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
     Route::get('facebook', 'Auth\AuthController@redirectToProvider');

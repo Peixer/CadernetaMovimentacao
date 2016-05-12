@@ -27,7 +27,7 @@
             @if(Auth::user())
                 <a href="{{ url(route('client.index')) }}" class="item"><i class="book icon"></i>Movimentos</a>
                 <a href="{{ url(route('client.historic')) }}" class="item"><i class="line chart icon"></i>Histórico</a>
-                <a href="#" class="item"><i class="pie chart icon"></i>Relatório</a>
+                <a href="{{ url(route('client.report')) }}" class="item"><i class="pie chart icon"></i>Relatório</a>
             @endif
 
             <div class="right menu">
@@ -68,7 +68,7 @@
                     <i class="book icon"></i>Movimentos</a>
                 <a href="{{ url(route('client.historic')) }}" class="item">
                     <i class="line chart icon"></i>Histórico</a>
-                <a href="#" class="item">
+                <a href="{{ url(route('client.report')) }}" class="item">
                     <i class="pie chart icon"></i>Relatório</a>
             @endif
 
@@ -123,13 +123,14 @@
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+@yield('post-script')
+
 <!-- Servidor adicionar /public -->
 <script src="{{ asset('/semantic/out/semantic.min.js') }} "></script>
 <script src="{{ asset('/js/app.js') }} "></script>
 <script src="{{ asset('/chart/dist/Chart.min.js') }}"></script>
 <script src="{{ asset('/angular-resource/angular-resource.min.js') }}"></script>
 
-@yield('post-script')
 
 </body>
 </html>

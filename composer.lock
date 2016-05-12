@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02415c328934b650c02cae2c67dd7fe5",
-    "content-hash": "0693219f1a956875ed1b97148c3cec1e",
+    "hash": "44009d0d290fca7ebbbfc3c16415e377",
+    "content-hash": "d692e58e742e89a5a8695c81ff8e5a6a",
     "packages": [
         {
             "name": "bestmomo/scafold",

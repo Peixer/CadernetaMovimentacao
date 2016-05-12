@@ -109,10 +109,22 @@ class MovimentacaoController extends Controller
         return view('client.historic.index');
     }
 
+    public function report()
+    {
+        return view('client.report.index');
+    }
+
     public function getHistoric($mes)
     {
         $userId = Auth::user()->id;
 
         return $this->repository->getHistoric($userId, $mes);
+    }
+
+    public function getReport(Request $request)
+    {
+        $userId = Auth::user()->id;
+
+        return $this->repository->getReport($request, $userId);
     }
 }

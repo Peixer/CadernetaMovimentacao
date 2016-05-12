@@ -227,6 +227,159 @@ angular.module('app', ['ngResource'])
         });
 
     })
+    .controller('reportCtrl', function ($scope, ReportFactory) {
+
+        $(document).ready(function () {
+
+            $scope.tag = '';
+            var myPieChart;
+            var data;
+            var ctx;
+            var counter = 0;
+
+            initializeCalendar();
+
+            $scope.addTag = function () {
+                if ($scope.tag !== '') {
+                    insertLabel();
+                    $scope.tag = '';
+                }
+            };
+
+            function insertLabel() {
+                counter++;
+                $('.ui.tag.labels')[0].innerHTML += '<a id="label' + counter + '" class="ui label"> #' + $scope.tag + '<i class="delete icon" onclick="remover(' + counter + ')"></i></a>';
+            }
+
+            function initializeCalendar() {
+                $('#rangestart').calendar({
+                    type: 'date',
+                    endCalendar: $('#rangeend')
+                });
+
+                $('#rangeend').calendar({
+                    type: 'date',
+                    startCalendar: $('#rangestart')
+                });
+            }
+
+            function getReport() {
+                return ReportFactory.getReport({}, {
+                    start: $('#rangestart').data().date.toLocaleDateString(),
+                    end: $('#rangeend').data().date.toLocaleDateString(),
+                    tags: getTags()
+                }).$promise;
+            }
+
+            function getAllTotal(data) {
+                var result = [];
+                var tags = getTags();
+
+                getTags().forEach(function (element, index) {
+                    element = element.replace('#', '');
+
+                    if (data.hasOwnProperty(element)) {
+                        var sum = 0;
+                        Object.getOwnPropertyDescriptor(data, element).value.forEach(function (elementTag, index) {
+                            sum += elementTag.total;
+                        });
+
+                        result.push(sum);
+                    }
+                });
+
+                return result;
+            };
+
+            $scope.filter = function () {
+                //insertLoading();
+
+                getReport().then(function (data) {
+                    updateChart(getAllTotal(data));
+                }, function (dataError) {
+
+                });
+
+                // $('#loading').remove();
+            };
+
+            function insertLoading() {
+                $('.ui.segment')[0].innerHTML += '<div id="loading" class="ui active inverted dimmer"><div class="ui large text loader">Carregando</div></div>';
+            }
+
+            function getTags() {
+                var tags = [];
+
+                $('.ui.tag.labels').children().each(function (index) {
+                    tags.push($(this).context.innerText);
+                });
+
+                return tags;
+            }
+
+            function updateChart(allTotal) {
+                myPieChart.data.labels = getTags();
+                myPieChart.data.datasets[0].data = allTotal;
+
+                var colors = getColorRandom(getTags());
+                myPieChart.data.datasets[0].backgroundColor = colors;
+                myPieChart.data.datasets[0].hoverBackgroundColor = colors;
+                myPieChart.update();
+            }
+
+            var colorList = ["#FFCE56", "#ff0000", "#40ff00", "#0000ff", "#ff00bf", "#00ffff", "#ffff00", "#000000"]
+
+            function getColorRandom(tags) {
+                var colors = [];
+
+                tags.forEach(function (element, index) {
+                   colors.push(colorList[index]);
+                });
+
+                return colors;
+            }
+
+            function initializeChart() {
+                ctx = document.getElementById("canvas").getContext("2d");
+                data = {
+                    labels: [
+                        "Red",
+                        "Green",
+                        "Yellow"
+                    ],
+                    datasets: [
+                        {
+                            data: [300, 50, 100],
+                            backgroundColor: [
+                                "#FF6384",
+                                "#36A2EB",
+                                "#FFCE56"
+                            ],
+                            hoverBackgroundColor: [
+                                "#FF6384",
+                                "#36A2EB",
+                                "#FFCE56"
+                            ]
+                        }]
+                };
+
+                myPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: data
+                });
+            }
+
+            initializeChart();
+        });
+    })
     .factory('HistoricFactory', ['$resource', 'appConfig', function ($resource, appConfig) {
         return $resource(appConfig.baseUrl + '/client/filterHistoric/:month', {month: '@month'});
+    }])
+    .factory('ReportFactory', ['$resource', 'appConfig', function ($resource, appConfig) {
+        return $resource(appConfig.baseUrl + '/client/filterReport', {}, {
+            getReport: {
+                method: 'POST',
+                isArray: false
+            }
+        });
     }]);

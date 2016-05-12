@@ -33,6 +33,9 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth', 'as' => 'client.'], 
     Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'MovimentacaoController@destroy']);
 
     Route::get('historic', ['as' => 'historic', 'uses' => 'MovimentacaoController@historic']);
-
     Route::get('filterHistoric/{mes}', ['as' => 'filterHistoric', 'uses' => 'MovimentacaoController@getHistoric']);
+
+    Route::get('report', ['as' => 'report', 'uses' => 'MovimentacaoController@report']);
+    Route::post('filterReport', ['as' => 'filterReport', 'uses' => 'MovimentacaoController@getReport']);
+
 });

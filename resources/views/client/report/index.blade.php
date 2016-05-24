@@ -61,10 +61,17 @@
 
                 </div>
             </div>
-        </div>
 
-        <div id="movimentacoes" class="ui center aligned container">
             <canvas id="canvas"></canvas>
+
+            <div class="ui large statistic">
+                <div class="value" id="totalReport">
+                    <i class="child icon"></i>
+                </div>
+                <div class="label">
+                    Total
+                </div>
+            </div>
         </div>
     </div>
 
@@ -72,7 +79,8 @@
 
 
 @section('post-script')
-    <link href="https://rawgit.com/mdehoog/Semantic-UI/calendar-dist/dist/semantic.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://rawgit.com/mdehoog/Semantic-UI/calendar-dist/dist/semantic.min.css" rel="stylesheet"
+          type="text/css"/>
     <script src="https://rawgit.com/mdehoog/Semantic-UI/calendar-dist/dist/semantic.min.js"></script>
 
     <script>

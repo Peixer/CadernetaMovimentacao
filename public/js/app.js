@@ -3,8 +3,8 @@
  */
 angular.module('app', ['ngResource'])
     .constant('appConfig', {
-        baseUrl: 'http://localhost:8000'
-        // baseUrl: 'http://caderneta.peixer.com'
+        //baseUrl: 'http://localhost:8000'
+         baseUrl: 'http://caderneta.peixer.com'
     })
     .controller("appCtrl", function () {
         $(document).ready(function () {
@@ -229,9 +229,10 @@ angular.module('app', ['ngResource'])
     })
     .controller('reportCtrl', function ($scope, ReportFactory) {
 
+        $scope.tag = '';
+
         $(document).ready(function () {
 
-            $scope.tag = '';
             var myPieChart;
             var data;
             var ctx;
@@ -271,41 +272,53 @@ angular.module('app', ['ngResource'])
                 }).$promise;
             }
 
-            function getAllTotal(data) {
+            function getSum(data) {
                 var result = [];
                 var tags = getTags();
 
                 getTags().forEach(function (element, index) {
                     element = element.replace('#', '');
 
+                    var sum = 0;
+
                     if (data.hasOwnProperty(element)) {
                         var sum = 0;
                         Object.getOwnPropertyDescriptor(data, element).value.forEach(function (elementTag, index) {
                             sum += elementTag.total;
                         });
-
-                        result.push(sum);
                     }
+
+                    result.push(sum);
                 });
 
                 return result;
             };
 
+            function getSumForTotal(sum) {
+                var result = 0;
+
+                sum.forEach(function (element, index) {
+                    result += element;
+                });
+
+                return result;
+            }
+
             $scope.filter = function () {
-                //insertLoading();
+                $('.fluid.ui.button').addClass('loading');
 
                 getReport().then(function (data) {
-                    updateChart(getAllTotal(data));
+
+                    var sum = getSum(data);
+                    updateChart(sum);
+                    $('#totalReport').innerHTML += '<a> ' + getSumForTotal(sum) + '</a>';
+
                 }, function (dataError) {
 
                 });
 
-                // $('#loading').remove();
+                $('.fluid.ui.button').removeClass('loading');
             };
-
-            function insertLoading() {
-                $('.ui.segment')[0].innerHTML += '<div id="loading" class="ui active inverted dimmer"><div class="ui large text loader">Carregando</div></div>';
-            }
 
             function getTags() {
                 var tags = [];
@@ -317,9 +330,9 @@ angular.module('app', ['ngResource'])
                 return tags;
             }
 
-            function updateChart(allTotal) {
+            function updateChart(sum) {
                 myPieChart.data.labels = getTags();
-                myPieChart.data.datasets[0].data = allTotal;
+                myPieChart.data.datasets[0].data = sum;
 
                 var colors = getColorRandom(getTags());
                 myPieChart.data.datasets[0].backgroundColor = colors;
@@ -333,7 +346,7 @@ angular.module('app', ['ngResource'])
                 var colors = [];
 
                 tags.forEach(function (element, index) {
-                   colors.push(colorList[index]);
+                    colors.push(colorList[index]);
                 });
 
                 return colors;

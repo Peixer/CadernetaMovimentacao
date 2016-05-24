@@ -1,0 +1,23 @@
+<ion-navbar *navbar>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Histórico - Lista</ion-title>
+</ion-navbar>
+
+<ion-content>
+    <ion-list>
+
+        <ion-item-group *ngFor="#itemData of itemsData">
+
+            <ion-item-divider light>{{itemData.data}}</ion-item-divider>
+
+            <button ion-item *ngFor="#item of itemData.items">
+                {{item.title}}
+                <div class="item-note" item-right>
+                    {{item.note}}
+                </div>
+            </button>
+        </ion-item-group>
+    </ion-list>
+</ion-content>

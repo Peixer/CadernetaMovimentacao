@@ -140,6 +140,9 @@ return [
         Laravolt\SemanticForm\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -197,6 +200,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'SemanticForm'    => Laravolt\SemanticForm\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
     ],
 
 ];

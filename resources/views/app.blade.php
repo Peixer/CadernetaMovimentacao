@@ -10,9 +10,9 @@
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 
-    <link href="{{ asset('/public/css/movimentacao.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/public/semantic/out/semantic.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/public/css/stylesheet.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/movimentacao.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/semantic/out/semantic.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/stylesheet.css') }}" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 </head>
@@ -126,10 +126,10 @@
 @yield('post-script')
 
 <!-- Servidor adicionar /public -->
-<script src="{{ asset('/public/semantic/out/semantic.min.js') }} "></script>
-<script src="{{ asset('/public/js/app.js') }} "></script>
-<script src="{{ asset('/public/chart/dist/Chart.min.js') }}"></script>
-<script src="{{ asset('/public/angular-resource/angular-resource.min.js') }}"></script>
+<script src="{{ asset('/semantic/out/semantic.min.js') }} "></script>
+<script src="{{ asset('/js/app.js') }} "></script>
+<script src="{{ asset('/chart/dist/Chart.min.js') }}"></script>
+<script src="{{ asset('/angular-resource/angular-resource.min.js') }}"></script>
 
 
 </body>

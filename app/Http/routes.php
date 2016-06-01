@@ -37,5 +37,10 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth', 'as' => 'client.'], 
 
     Route::get('report', ['as' => 'report', 'uses' => 'MovimentacaoController@report']);
     Route::post('filterReport', ['as' => 'filterReport', 'uses' => 'MovimentacaoController@getReport']);
+});
 
+Route::group(['middleware' => 'cors'], function () {
+    Route::post('oauth/access_token', function () {
+        return Response::json(Authorizer::issueAccessToken());
+    });
 });

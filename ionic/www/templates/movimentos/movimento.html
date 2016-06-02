@@ -29,8 +29,8 @@
 
         <ion-list>
             <ion-item class="item item-icon-left" ng-repeat="produto in produtos" ng-click="addItem(x)">
-                <i class="icon ion-heart" ng-click="favoritos(x)"
-                   ng-class="{'ion-heart': x.favorito, 'ion-heart-broken':!x.favorito}"></i>
+                <i class="icon ion-heart" ng-click="favoritos(produto)"
+                   ng-class="{'ion-heart': produto.favorito, 'ion-heart-broken':!produto.favorito}"></i>
                 {{produto.descricao}}
 
                 <h2>${{produto.total}}</h2>

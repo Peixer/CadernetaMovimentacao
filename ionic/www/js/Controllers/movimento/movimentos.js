@@ -18,7 +18,7 @@ angular.module('starter.controllers')
             };
 
 
-            $scope.favoritos = function (x) {
-                x.favorito = !x.favorito;
+            $scope.favoritos = function (produto) {
+                produto.favorito = !produto.favorito;
             }
         }]);

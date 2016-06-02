@@ -18,7 +18,8 @@ class Movimentacoe extends Model implements Transformable
         'data',
         'tipoCobranca',
         'tipoPagto',
-        'total'
+        'total',
+        'favorito'
     ];
 
     public function user()

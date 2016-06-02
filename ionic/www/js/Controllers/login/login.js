@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
     .controller('LoginCtrl', [
-        '$scope', 'OAuth', 'OAuthToken', '$ionicPopup', 'UserData', '$redirect', 'User',
-        function ($scope, OAuth, OAuthToken, $ionicPopup, UserData, $redirect, User) {
+        '$scope', 'OAuth', 'OAuthToken', '$ionicPopup', 'informacoesUsuario', '$direcionador', 'usuario', '$loadingCustomizado',
+        function ($scope, OAuth, OAuthToken, $ionicPopup, informacoesUsuario, $direcionador, usuario, $loadingCustomizado) {
 
             $scope.user = {
                 username: '',
@@ -9,18 +9,23 @@ angular.module('starter.controllers')
             };
 
             $scope.login = function () {
+
+                $loadingCustomizado.carregar();
+
                 var promiseAccessToken = OAuth.getAccessToken($scope.user);
 
                 promiseAccessToken.then(function (data) {
-                    return User.authenticated().$promise;
+                    return usuario.autenticarUsuario().$promise;
                 }).then(function (data) {
-                    UserData.set(data.data);
-                    $redirect.redirectAfterLogin();
+                    informacoesUsuario.atribuir(data.data);
+                    $loadingCustomizado.esconder();
+                    $direcionador.direcionarAposLogin();
                 }, function (dataErro) {
-                    UserData.set(null);
+                    informacoesUsuario.atribuir(null);
                     OAuthToken.removeToken();
+                    $loadingCustomizado.esconder();
                     $ionicPopup.alert({
-                        title: 'Advertência',
+                        title: 'Erro',
                         template: 'Login e/ou senha inválidos'
                     });
                 });

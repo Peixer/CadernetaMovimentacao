@@ -1,9 +1,9 @@
 angular.module('starter.controllers')
     .controller('UsuarioMenuCtrl',
-        ['$scope', '$ionicLoading', 'UserData', '$state',
-            function ($scope, $ionicLoading, UserData, $state) {
+        ['$scope', 'informacoesUsuario', '$state',
+            function ($scope, informacoesUsuario, $state) {
 
-                $scope.user = UserData.get();
+                $scope.user = informacoesUsuario.obter();
 
                 $scope.logout = function () {
                     $state.go('logout');

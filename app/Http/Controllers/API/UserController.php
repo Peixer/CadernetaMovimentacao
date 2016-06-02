@@ -17,7 +17,7 @@ class UserController extends Controller
         $this->repository = $repository;
     }
 
-    public function authenticated()
+    public function autenticarUsuario()
     {
         $id = Authorizer::getResourceOwnerId();
 

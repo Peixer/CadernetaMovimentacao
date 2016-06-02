@@ -2,6 +2,7 @@
 
 namespace Caderneta\Repositories;
 
+use Caderneta\Presenters\MovimentacaoPresenter;
 use Carbon\Carbon;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -14,6 +15,8 @@ use Caderneta\Models\Movimentacoe;
  */
 class MovimentacoeRepositoryEloquent extends BaseRepository implements MovimentacoeRepository
 {
+    protected $skipPresenter = true;
+
     /**
      * Specify Model class name
      *
@@ -24,6 +27,11 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
         return Movimentacoe::class;
     }
 
+    public function presenter()
+    {
+        return MovimentacaoPresenter::class;
+    }
+    
     public function getHistoric($id, $mes)
     {
         $result = [];

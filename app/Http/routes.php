@@ -46,5 +46,7 @@ Route::group(['middleware' => 'cors'], function () {
 
     Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], function () {
         Route::get('autenticarUsuario', 'API\UserController@autenticarUsuario');
+        
+        Route::resource('movimentos', 'API\MovimentosController');
     });
 });

@@ -23,8 +23,7 @@
                 </div>
             </div>
 
-            <table class=" ui selectable celled center aligned table green
-                        ">
+            <table class=" ui selectable celled center aligned table green">
                 <thead>
                 <tr>
                     <th>Início</th>

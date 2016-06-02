@@ -28,12 +28,12 @@
         <br>
 
         <ion-list>
-            <ion-item class="item item-icon-left" ng-repeat="x in products" ng-click="addItem(x)">
+            <ion-item class="item item-icon-left" ng-repeat="produto in produtos" ng-click="addItem(x)">
                 <i class="icon ion-heart" ng-click="favoritos(x)"
                    ng-class="{'ion-heart': x.favorito, 'ion-heart-broken':!x.favorito}"></i>
-                {{x.name}}
+                {{produto.descricao}}
 
-                <h2>${{x.price}}</h2>
+                <h2>${{produto.total}}</h2>
 
                 <ion-option-button class="button button-assertive icon-left ion-trash-a">Deletar</ion-option-button>
             </ion-item>

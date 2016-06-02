@@ -1,48 +1,21 @@
 angular.module('starter.controllers')
     .controller('MovimentoCtrl', [
-        '$scope', function ($scope) {
+        '$scope', 'movimento', '$loadingCustomizado', function ($scope, movimento, $loadingCustomizado) {
+            $scope.produtos = [];
 
-            $scope.products = [{
-                name: 'FURB',
-                price: 122,
-                favorito: false
-            }, {
-                name: 'Academia',
-                price: 262,
-                favorito: true
-            }, {
-                name: 'Cooper',
-                price: 12,
-                favorito: false
-            }, {
-                name: 'Inventti teste te de mais teste para mais ',
-                price: 1600,
-                favorito: true
-            }, {
-                name: 'Inventti teste te de mais teste para mais ',
-                price: 1600,
-                favorito: true
-            }, {
-                name: 'Inventti teste te de mais teste para mais ',
-                price: 1600,
-                favorito: true
-            }, {
-                name: 'Inventti teste te de mais teste para mais ',
-                price: 1600,
-                favorito: true
-            }, {
-                name: 'Inventti teste te de mais teste para mais ',
-                price: 1600,
-                favorito: true
-            }, {
-                name: 'Inventti teste te de mais teste para mais ',
-                price: 1600,
-                favorito: true
-            }, {
-                name: 'Cooper',
-                price: 12,
-                favorito: false
-            },];
+            carregarMovimentos();
+
+            function carregarMovimentos() {
+                $loadingCustomizado.carregar();
+                var promiseMovimento = movimento.obterMovimentos().$promise
+
+                promiseMovimento.then(function (data) {
+                    $scope.produtos = data.data;
+                    $loadingCustomizado.esconder();
+                }, function (dataErro) {
+                    $loadingCustomizado.esconder();
+                });
+            };
 
 
             $scope.favoritos = function (x) {

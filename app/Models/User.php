@@ -4,6 +4,8 @@ namespace Caderneta\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -12,10 +14,10 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
-    CanResetPasswordContract
+    CanResetPasswordContract, Transformable
 {
-    use Authenticatable, Authorizable, CanResetPassword;
-
+    use TransformableTrait, Authenticatable, Authorizable, CanResetPassword;
+    
     /**
      * The database table used by the model.
      *
@@ -28,7 +30,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password','facebook_id'];
+    protected $fillable = ['name', 'email', 'password', 'facebook_id'];
 
     /**
      * The attributes excluded from the model's JSON form.

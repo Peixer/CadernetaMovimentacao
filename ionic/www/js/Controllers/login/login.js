@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
     .controller('LoginCtrl', [
-        '$scope', 'OAuth', 'OAuthToken', '$ionicPopup', 'UserData', '$redirect',
-        function ($scope, OAuth, OAuthToken, $ionicPopup, UserData, $redirect) {
+        '$scope', 'OAuth', 'OAuthToken', '$ionicPopup', 'UserData', '$redirect', 'User',
+        function ($scope, OAuth, OAuthToken, $ionicPopup, UserData, $redirect, User) {
 
             $scope.user = {
                 username: '',
@@ -12,6 +12,8 @@ angular.module('starter.controllers')
                 var promiseAccessToken = OAuth.getAccessToken($scope.user);
 
                 promiseAccessToken.then(function (data) {
+                    return User.authenticated().$promise;
+                }).then(function (data) {
                     UserData.set(data.data);
                     $redirect.redirectAfterLogin();
                 }, function (dataErro) {

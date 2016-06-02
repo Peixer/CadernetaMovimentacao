@@ -43,4 +43,8 @@ Route::group(['middleware' => 'cors'], function () {
     Route::post('oauth/access_token', function () {
         return Response::json(Authorizer::issueAccessToken());
     });
+
+    Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], function () {
+        Route::get('authenticated', 'API\UserController@authenticated');
+    });
 });

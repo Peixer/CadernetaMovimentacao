@@ -27,5 +27,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'Caderneta\Repositories\MovimentacoeRepository',
             'Caderneta\Repositories\MovimentacoeRepositoryEloquent');
 
+        $this->app->bind(
+            'Caderneta\Repositories\UserRepository',
+            'Caderneta\Repositories\UserRepositoryEloquent');
+
     }
 }

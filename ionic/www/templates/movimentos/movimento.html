@@ -35,7 +35,10 @@
 
                 <h2>${{produto.total}}</h2>
 
-                <ion-option-button class="button button-assertive icon-left ion-trash-a">Deletar</ion-option-button>
+                <ion-option-button class="button button-assertive icon-left ion-trash-a"
+                                   ng-click="deletar(produto, $index)">
+                    Deletar
+                </ion-option-button>
             </ion-item>
         </ion-list>
 

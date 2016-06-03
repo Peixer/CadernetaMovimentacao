@@ -3,7 +3,7 @@ angular.module('starter.controllers')
         '$scope', 'OAuth', 'OAuthToken', '$ionicPopup', 'informacoesUsuario', '$direcionador', 'usuario', '$loadingCustomizado',
         function ($scope, OAuth, OAuthToken, $ionicPopup, informacoesUsuario, $direcionador, usuario, $loadingCustomizado) {
 
-            $scope.user = {
+            $scope.usuario = {
                 username: '',
                 password: ''
             };
@@ -12,7 +12,7 @@ angular.module('starter.controllers')
 
                 $loadingCustomizado.carregar();
 
-                var promiseAccessToken = OAuth.getAccessToken($scope.user);
+                var promiseAccessToken = OAuth.getAccessToken($scope.usuario);
 
                 promiseAccessToken.then(function (data) {
                     return usuario.autenticarUsuario().$promise;

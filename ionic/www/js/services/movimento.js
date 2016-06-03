@@ -1,9 +1,19 @@
 angular.module('starter.services')
     .factory('movimento', ['$resource', 'appConfig', function ($resource, appConfig) {
-        return $resource(appConfig.baseUrl + '/api/movimentos', {}, {
+        var url = appConfig.baseUrl + '/api/';
+        return $resource(url, {}, {
             obterMovimentos: {
                 method: 'GET',
-                url: appConfig.baseUrl + '/api/movimentos'
+                url: url + 'movimentos'
+            },
+            obterMovimentosFavoritos: {
+                method: 'GET',
+                url: url + 'movimentosFavoritos',
+            },
+            deletarMovimento: {
+                method: 'GET',
+                url: url + 'deletarMovimento/:id',
+                paramDefaults: {id: '@id'}
             }
         });
     }]);

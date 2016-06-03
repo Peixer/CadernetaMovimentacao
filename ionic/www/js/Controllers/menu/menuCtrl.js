@@ -3,7 +3,7 @@ angular.module('starter.controllers')
         ['$scope', 'informacoesUsuario', '$state',
             function ($scope, informacoesUsuario, $state) {
 
-                $scope.user = informacoesUsuario.obter();
+                $scope.usuario = informacoesUsuario.obter();
 
                 $scope.logout = function () {
                     $state.go('logout');

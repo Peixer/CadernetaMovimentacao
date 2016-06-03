@@ -31,7 +31,7 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
     {
         return MovimentacaoPresenter::class;
     }
-    
+
     public function getHistoric($id, $mes)
     {
         $result = [];
@@ -73,6 +73,14 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
         }
 
         return $result;
+    }
+
+
+    public function deletarMovimento($idMovimento, $idUsuario)
+    {
+       return $this->model->where('user_id', $idUsuario)
+                    ->where('id', $idMovimento)
+                    ->delete();
     }
 
     /**

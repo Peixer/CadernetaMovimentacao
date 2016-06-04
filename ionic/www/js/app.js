@@ -6,13 +6,13 @@ angular.module('starter', [
     'starter.controllers',
     'starter.services',
     'angular-oauth2',
-    'ngResource'
+    'ngResource',
+    'jett.ionic.filter.bar'
 ])
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
                 cordova.plugins.Keyboard.disableScroll(true);
             }
             if (window.StatusBar) {
@@ -29,7 +29,7 @@ angular.module('starter', [
         }
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, appConfig) {
+    .config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, appConfig, $ionicFilterBarConfigProvider) {
         $stateProvider
             .state('login', {
                 url: '/login',
@@ -70,4 +70,10 @@ angular.module('starter', [
                 secure: false //Criptografar com HTTPS
             }
         });
+
+        $ionicFilterBarConfigProvider.theme('balanced');
+        $ionicFilterBarConfigProvider.clear('ion-close');
+        $ionicFilterBarConfigProvider.backdrop(true);
+        $ionicFilterBarConfigProvider.transition('horizontal');
+        $ionicFilterBarConfigProvider.placeholder('Pesquisar');
     });

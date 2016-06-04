@@ -1,7 +1,8 @@
 angular.module('starter.controllers')
     .controller('MovimentoCtrl', [
-        '$scope', 'movimento', '$loadingCustomizado', '$ionicPopup', function ($scope, movimento, $loadingCustomizado, $ionicPopup) {
+        '$scope', 'movimento', '$loadingCustomizado', '$ionicPopup', '$ionicFilterBar', function ($scope, movimento, $loadingCustomizado, $ionicPopup, $ionicFilterBar) {
             $scope.produtos = [];
+            var filterBarInstance;
 
             carregarMovimentos();
 
@@ -50,6 +51,12 @@ angular.module('starter.controllers')
             };
 
             $scope.atualizarMovimentos = function () {
+
+                if (filterBarInstance) {
+                    filterBarInstance();
+                    filterBarInstance = null;
+                }
+
                 obterMovimentosPromise().then(function (data) {
                     $scope.produtos = data.data;
                     $scope.$broadcast('scroll.refreshComplete');
@@ -57,4 +64,14 @@ angular.module('starter.controllers')
                     $scope.$broadcast('scroll.refreshComplete');
                 });
             };
+
+            $scope.abrirPesquisa = function () {
+                filterBarInstance = $ionicFilterBar.show({
+                    items: $scope.produtos,
+                    favoritesEnabled: true,
+                    update: function (filteredItems, filterText) {
+                        $scope.produtos = filteredItems;
+                    }
+                });
+            }
         }]);

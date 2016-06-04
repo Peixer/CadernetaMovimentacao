@@ -25,7 +25,7 @@
         <ion-refresher pulling-text="Puxe para atualizar..." on-refresh="atualizarMovimentos()"></ion-refresher>
 
         <ion-list>
-            <ion-item class="item item-icon-left" ng-repeat="produto in produtos" ng-click="addItem(x)">
+            <ion-item class="item item-icon-left" ng-repeat="produto in produtos">
                 <i class="icon ion-heart" ng-click="favoritos(produto)"
                    ng-class="{'ion-heart': produto.favorito, 'ion-heart-broken':!produto.favorito}"></i>
                 {{produto.descricao}}
@@ -38,5 +38,6 @@
                 </ion-option-button>
             </ion-item>
         </ion-list>
+        <ion-infinite-scroll ng-if="temMaisItens" on-infinite="carregarMaisMovimentos()" distance="1%"></ion-infinite-scroll>
     </ion-content>
 </ion-view>

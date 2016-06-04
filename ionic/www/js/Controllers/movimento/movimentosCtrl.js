@@ -3,14 +3,14 @@ angular.module('starter.controllers')
         '$scope', 'movimento', '$loadingCustomizado', '$ionicPopup', '$ionicFilterBar', '$cordovaToast',
         function ($scope, movimento, $loadingCustomizado, $ionicPopup, $ionicFilterBar, $cordovaToast) {
             $scope.produtos = [];
+            $scope.temMaisItens = true;
+            var pagina = 1;
             var filterBarInstance;
-
-            carregarMovimentos();
 
             function carregarMovimentos() {
                 $loadingCustomizado.carregar();
 
-                obterMovimentosPromise().then(function (data) {
+                obterMovimentosPromise(1).then(function (data) {
                     $scope.produtos = data.data;
                     $loadingCustomizado.esconder();
                 }, function (dataErro) {
@@ -18,13 +18,16 @@ angular.module('starter.controllers')
                 });
             };
 
-            function obterMovimentosPromise() {
-                return movimento.obterMovimentos().$promise;
+            function obterMovimentosPromise(paginaMovimentos) {
+                return movimento.obterMovimentos({
+                    page: paginaMovimentos,
+                    orderBy: 'created_at',
+                    sortedBy: 'desc'
+                }).$promise;
             }
 
             $scope.favoritos = function (produto) {
                 produto.favorito = !produto.favorito;
-
 
                 var promiseAlterarStatusFavorito = movimento.alterarStatusFavorito({id: produto.id}).$promise;
                 promiseAlterarStatusFavorito.then(function (data) {
@@ -72,7 +75,7 @@ angular.module('starter.controllers')
                     filterBarInstance = null;
                 }
 
-                obterMovimentosPromise().then(function (data) {
+                obterMovimentosPromise(1).then(function (data) {
                     $scope.produtos = data.data;
                     $scope.$broadcast('scroll.refreshComplete');
                 }, function (data) {
@@ -87,6 +90,18 @@ angular.module('starter.controllers')
                     update: function (filteredItems, filterText) {
                         $scope.produtos = filteredItems;
                     }
+                });
+            };
+
+            $scope.carregarMaisMovimentos = function () {
+                obterMovimentosPromise(pagina).then(function (data) {
+                    $scope.produtos = $scope.produtos.concat(data.data);
+                    if ($scope.produtos.length == data.meta.pagination.total) {
+                        $scope.temMaisItens = false;
+                    }
+
+                    pagina += 1;
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
                 });
             }
         }]);

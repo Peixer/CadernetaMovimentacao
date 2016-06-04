@@ -8,6 +8,17 @@ angular.module('starter.controllers')
                 password: ''
             };
 
+            $scope.$on('$ionicView.enter', function () {
+                obterInformacoesUsuarioArmazenadas();
+            });
+
+            function obterInformacoesUsuarioArmazenadas() {
+                var infUsuario = informacoesUsuario.obter();
+
+                if (infUsuario)
+                    $direcionador.direcionarAposLogin();
+            };
+
             $scope.login = function () {
 
                 $loadingCustomizado.carregar();

@@ -7,15 +7,18 @@ angular.module('starter.controllers')
 
             function carregarMovimentos() {
                 $loadingCustomizado.carregar();
-                var promiseMovimento = movimento.obterMovimentos().$promise;
 
-                promiseMovimento.then(function (data) {
+                obterMovimentosPromise().then(function (data) {
                     $scope.produtos = data.data;
                     $loadingCustomizado.esconder();
                 }, function (dataErro) {
                     $loadingCustomizado.esconder();
                 });
             };
+
+            function obterMovimentosPromise() {
+                return movimento.obterMovimentos().$promise;
+            }
 
             $scope.favoritos = function (produto) {
                 produto.favorito = !produto.favorito;
@@ -43,6 +46,15 @@ angular.module('starter.controllers')
                         title: 'Alerta',
                         template: 'Não foi deletado item'
                     });
+                });
+            };
+
+            $scope.atualizarMovimentos = function () {
+                obterMovimentosPromise().then(function (data) {
+                    $scope.produtos = data.data;
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, function (data) {
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
         }]);

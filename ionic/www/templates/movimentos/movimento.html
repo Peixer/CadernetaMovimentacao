@@ -21,11 +21,7 @@
     </div>
 
     <ion-content class="padding has-tabs">
-        <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Pesquise aqui">
-        </label>
-        <br>
+        <ion-refresher pulling-text="Puxe para atualizar..." on-refresh="atualizarMovimentos()"></ion-refresher>
 
         <ion-list>
             <ion-item class="item item-icon-left" ng-repeat="produto in produtos" ng-click="addItem(x)">
@@ -41,6 +37,5 @@
                 </ion-option-button>
             </ion-item>
         </ion-list>
-
     </ion-content>
 </ion-view>

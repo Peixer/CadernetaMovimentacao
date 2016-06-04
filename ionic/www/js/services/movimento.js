@@ -14,6 +14,11 @@ angular.module('starter.services')
                 method: 'GET',
                 url: url + 'deletarMovimento/:id',
                 paramDefaults: {id: '@id'}
+            },
+            alterarStatusFavorito: {
+                method: 'GET',
+                url: url + 'alterarStatusFavorito/:id',
+                paramDefaults: {id: '@id'}
             }
         });
     }]);

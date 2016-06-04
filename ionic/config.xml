@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.ionic947646" version="0.0.1" xmlns="http://www.w3.org/ns/widgets"
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Caderneta Online</name>
+    <name>Caderneta</name>
     <description>
         App de controle financeiro
     </description>
-    <author email="glaicon@peixer.com" href="#">
+    <author email="glaicon@peixer.com" href="">
         Glaicon
     </author>
     <content src="index.html"/>

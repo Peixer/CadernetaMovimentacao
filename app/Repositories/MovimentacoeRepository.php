@@ -11,4 +11,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface MovimentacoeRepository extends RepositoryInterface
 {
     function deletarMovimento($idMovimento, $idUsuario);
+    function alterarStatusFavorito($idMovimento, $idUsuario);
 }

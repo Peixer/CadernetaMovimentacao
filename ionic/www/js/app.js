@@ -7,6 +7,7 @@ angular.module('starter', [
     'starter.services',
     'angular-oauth2',
     'ngResource',
+    'ngCordova',
     'jett.ionic.filter.bar'
 ])
     .run(function ($ionicPlatform) {

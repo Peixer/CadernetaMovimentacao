@@ -1,6 +1,7 @@
 angular.module('starter.controllers')
     .controller('MovimentoCtrl', [
-        '$scope', 'movimento', '$loadingCustomizado', '$ionicPopup', '$ionicFilterBar', function ($scope, movimento, $loadingCustomizado, $ionicPopup, $ionicFilterBar) {
+        '$scope', 'movimento', '$loadingCustomizado', '$ionicPopup', '$ionicFilterBar', '$cordovaToast',
+        function ($scope, movimento, $loadingCustomizado, $ionicPopup, $ionicFilterBar, $cordovaToast) {
             $scope.produtos = [];
             var filterBarInstance;
 
@@ -23,6 +24,20 @@ angular.module('starter.controllers')
 
             $scope.favoritos = function (produto) {
                 produto.favorito = !produto.favorito;
+
+
+                var promiseAlterarStatusFavorito = movimento.alterarStatusFavorito({id: produto.id}).$promise;
+                promiseAlterarStatusFavorito.then(function (data) {
+                    var mensagem;
+                    if (produto.favorito)
+                        mensagem = 'Produto incluído em favoritos';
+                    else
+                        mensagem = 'Produto removido de favoritos';
+
+                    $cordovaToast.show(mensagem, 'short', 'bottom');
+                }, function (dataErro) {
+                    $cordovaToast.show('Erro ao alterar produto', 'short', 'bottom');
+                });
             };
 
             $scope.deletar = function (produto, index) {

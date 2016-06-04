@@ -46,4 +46,11 @@ class MovimentosController extends Controller
 
         return $this->repository->deletarMovimento($id, $idUsuario);
     }
+
+    public function alterarStatusFavorito($id)
+    {
+        $idUsuario = Authorizer::getResourceOwnerId();
+
+        $this->repository->alterarStatusFavorito($id, $idUsuario);
+    }
 }

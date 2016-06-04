@@ -78,9 +78,22 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
 
     public function deletarMovimento($idMovimento, $idUsuario)
     {
-       return $this->model->where('user_id', $idUsuario)
-                    ->where('id', $idMovimento)
-                    ->delete();
+        return $this->model->where('user_id', $idUsuario)
+            ->where('id', $idMovimento)
+            ->delete();
+    }
+
+    function alterarStatusFavorito($idMovimento, $idUsuario)
+    {
+        $movimento = $this->model
+            ->where('user_id', $idUsuario)
+            ->where('id', $idMovimento)
+            ->first();
+
+        $movimento->favorito = !$movimento->favorito;
+        $movimento->save();
+
+        return $this->skipPresenter(false)->parserResult($movimento);
     }
 
     /**

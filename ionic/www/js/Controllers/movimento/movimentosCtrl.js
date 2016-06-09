@@ -53,17 +53,13 @@ angular.module('starter.controllers')
                     $scope.produtos.splice(index, 1);
 
                     $loadingCustomizado.esconder();
-
-                    $ionicPopup.alert({
-                        title: 'Sucesso',
-                        template: 'Item deletado'
-                    });
+                    $cordovaToast.show('Produto deletado', 'short', 'bottom');
                 }, function (dataErro) {
                     $loadingCustomizado.esconder();
 
                     $ionicPopup.alert({
                         title: 'Alerta',
-                        template: 'Não foi deletado item'
+                        template: 'Produto não foi deletado'
                     });
                 });
             };
@@ -86,7 +82,7 @@ angular.module('starter.controllers')
             $scope.abrirPesquisa = function () {
                 filterBarInstance = $ionicFilterBar.show({
                     items: $scope.produtos,
-                    favoritesEnabled: true,
+                    filterProperties : ['descricao'],
                     update: function (filteredItems, filterText) {
                         $scope.produtos = filteredItems;
                     }
@@ -101,6 +97,7 @@ angular.module('starter.controllers')
                     }
 
                     pagina += 1;
+
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                 });
             }

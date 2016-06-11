@@ -4,8 +4,8 @@ namespace Caderneta\Http\Controllers\API;
 
 use Caderneta\Http\Controllers\Controller;
 use Caderneta\Repositories\MovimentacoeRepository;
-use Caderneta\Http\Requests;
-use Caderneta\Repositories\UserRepository;
+use Illuminate\Http\Request;
+use Illuminate\Http\Requests;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 
@@ -26,7 +26,7 @@ class MovimentosController extends Controller
             ->skipPresenter(false)
             ->scopeQuery(function ($query) use ($id) {
                 return $query->where('user_id', '=', $id);
-            })->paginate();
+            })->paginate(10);
     }
 
     public function obterMovimentosFavoritos()
@@ -52,5 +52,15 @@ class MovimentosController extends Controller
         $idUsuario = Authorizer::getResourceOwnerId();
 
         $this->repository->alterarStatusFavorito($id, $idUsuario);
+    }
+
+    public function adicionarMovimento(Request $request)
+    {
+        $idUsuario = Authorizer::getResourceOwnerId();
+
+        $data = $request->all();
+        $data['user_id'] = $idUsuario;
+
+        return $this->repository->create($data);
     }
 }

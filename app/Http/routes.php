@@ -51,5 +51,6 @@ Route::group(['middleware' => 'cors'], function () {
         Route::get('movimentosFavoritos', 'API\MovimentosController@obterMovimentosFavoritos');
         Route::get('deletarMovimento/{id}', 'API\MovimentosController@deletarMovimento');
         Route::get('alterarStatusFavorito/{id}', 'API\MovimentosController@alterarStatusFavorito');
+        Route::post('adicionarMovimento', 'API\MovimentosController@adicionarMovimento');
     });
 });

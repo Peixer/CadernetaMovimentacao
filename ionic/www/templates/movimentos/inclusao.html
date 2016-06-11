@@ -1,0 +1,49 @@
+<ion-view>
+    <ion-nav-bar class="bar bar-balanced" align-title="center">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-arrow-left-c"></i>Voltar
+        </ion-nav-back-button>
+        <ion-nav-title>Movimento</ion-nav-title>
+    </ion-nav-bar>
+
+    <ion-content class="padding">
+        <form name="form_login" ng-submit="salvar()">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" name="descricao" ng-model="movimento.descricao" placeholder="Digite a descrição"
+                           required="required"/>
+                </label>
+            </div>
+
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="date" name="data" ng-model="movimento.data" placeholder="Digite a data"
+                           required="required"/>
+                </label>
+            </div>
+
+            <div class="list list-inset">
+                <label class="item item-toggle">
+                    Débito
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" ng-model="movimento.tipoCobranca">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </label>
+            </div>
+
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" name="valor" ng-model="movimento.total" placeholder="Digite o valor"
+                           required="required"/>
+                </label>
+            </div>
+
+            <button class="button button-balanced button-block button-outline" type="submit">
+                Salvar
+            </button>
+        </form>
+    </ion-content>
+</ion-view>

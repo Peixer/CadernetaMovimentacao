@@ -46,8 +46,13 @@ angular.module('starter', [
             })
             .state('usuario.movimento', {
                 url: '/movimento',
-                templateUrl: 'templates/movimentos/movimento.html',
+                templateUrl: 'templates/movimentos/movimentos.html',
                 controller: 'MovimentoCtrl'
+            })
+            .state('usuario.inclusaoMovimento', {
+                url: '/movimento/inclusao',
+                templateUrl: 'templates/movimentos/inclusao.html',
+                controller: 'InclusaoMovimentoCtrl'
             })
             .state('usuario.historico', {
                 url: '/historico',

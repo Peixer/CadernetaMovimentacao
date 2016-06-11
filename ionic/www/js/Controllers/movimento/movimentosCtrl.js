@@ -7,17 +7,6 @@ angular.module('starter.controllers')
             var pagina = 1;
             var filterBarInstance;
 
-            function carregarMovimentos() {
-                $loadingCustomizado.carregar();
-
-                obterMovimentosPromise(1).then(function (data) {
-                    $scope.produtos = data.data;
-                    $loadingCustomizado.esconder();
-                }, function (dataErro) {
-                    $loadingCustomizado.esconder();
-                });
-            };
-
             function obterMovimentosPromise(paginaMovimentos) {
                 return movimento.obterMovimentos({
                     page: paginaMovimentos,
@@ -74,6 +63,9 @@ angular.module('starter.controllers')
                 obterMovimentosPromise(1).then(function (data) {
                     $scope.produtos = data.data;
                     $scope.$broadcast('scroll.refreshComplete');
+
+                    pagina = 2;
+                    $scope.temMaisItens = true;
                 }, function (data) {
                     $scope.$broadcast('scroll.refreshComplete');
                 });
@@ -82,7 +74,7 @@ angular.module('starter.controllers')
             $scope.abrirPesquisa = function () {
                 filterBarInstance = $ionicFilterBar.show({
                     items: $scope.produtos,
-                    filterProperties : ['descricao'],
+                    filterProperties: ['descricao'],
                     update: function (filteredItems, filterText) {
                         $scope.produtos = filteredItems;
                     }

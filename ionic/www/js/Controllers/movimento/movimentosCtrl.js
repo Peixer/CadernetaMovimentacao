@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
     .controller('MovimentoCtrl', [
-        '$scope', 'movimento', '$loadingCustomizado', '$ionicPopup', '$ionicFilterBar', '$cordovaToast',
-        function ($scope, movimento, $loadingCustomizado, $ionicPopup, $ionicFilterBar, $cordovaToast) {
+        '$scope', 'movimento', '$loadingCustomizado', '$ionicPopup', '$ionicFilterBar', '$cordovaToast', '$state', 'armazenadorProduto',
+        function ($scope, movimento, $loadingCustomizado, $ionicPopup, $ionicFilterBar, $cordovaToast, $state, armazenadorProduto) {
             $scope.produtos = [];
             $scope.temMaisItens = true;
             var pagina = 1;
@@ -14,6 +14,16 @@ angular.module('starter.controllers')
                     sortedBy: 'desc'
                 }).$promise;
             }
+
+            $scope.incluir = function () {
+                armazenadorProduto.limparArmazenador();
+                $state.go('usuario.inclusaoMovimento');
+            };
+
+            $scope.editar = function (produto) {
+                armazenadorProduto.atribuir(JSON.stringify(produto));
+                $state.go('usuario.inclusaoMovimento');
+            };
 
             $scope.favoritos = function (produto) {
                 produto.favorito = !produto.favorito;

@@ -6,7 +6,7 @@
         <ion-nav-title>Movimentos</ion-nav-title>
         <ion-nav-buttons side="secondary">
             <button class=" button button-icon icon ion-search positive" ng-click="abrirPesquisa()"></button>
-            <button class="button button-icon ion-android-add-circle" ui-sref="usuario.inclusaoMovimento"></button>
+            <button class="button button-icon ion-android-add-circle" ng-click="incluir()"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
 
@@ -28,16 +28,19 @@
             <ion-item class="item item-icon-left" ng-repeat="produto in produtos">
                 <i class="icon ion-heart" ng-click="favoritos(produto)"
                    ng-class="{'ion-heart': produto.favorito, 'ion-heart-broken':!produto.favorito}"></i>
-                {{produto.descricao}}
+                <div ng-click="editar(produto)">
+                    {{produto.descricao}}
 
-                <h2>${{produto.total}}</h2>
+                    <h2>${{produto.total}}</h2>
 
-                <ion-option-button class="button button-assertive icon-left ion-trash-a"
-                                   ng-click="deletar(produto, $index)">
-                    Deletar
-                </ion-option-button>
+                    <ion-option-button class="button button-assertive icon-left ion-trash-a"
+                                       ng-click="deletar(produto, $index)">
+                        Deletar
+                    </ion-option-button>
+                </div>
             </ion-item>
         </ion-list>
-        <ion-infinite-scroll ng-if="temMaisItens" on-infinite="carregarMaisMovimentos()" distance="1%"></ion-infinite-scroll>
+        <ion-infinite-scroll ng-if="temMaisItens" on-infinite="carregarMaisMovimentos()"
+                             distance="1%"></ion-infinite-scroll>
     </ion-content>
 </ion-view>

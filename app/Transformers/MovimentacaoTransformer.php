@@ -23,9 +23,10 @@ class MovimentacaoTransformer extends TransformerAbstract
         return [
             'id' => (int)$model->id,
             'descricao' => $model->descricao,
-            'data' => $model->data,
+            'data' => date("Y/m/d", strtotime($model->data)),
             'total' => (float)$model->total,
-            'favorito' => (boolean)$model->favorito
+            'favorito' => (boolean)$model->favorito,
+            'tipoCobranca' => (boolean)$model->tipoCobranca,
         ];
     }
 }

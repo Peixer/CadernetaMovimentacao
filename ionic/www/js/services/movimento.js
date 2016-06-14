@@ -20,9 +20,9 @@ angular.module('starter.services')
                 url: url + 'alterarStatusFavorito/:id',
                 paramDefaults: {id: '@id'}
             },
-            adicionarMovimento: {
+            inserirOuAtualizarMovimento: {
                 method: 'POST',
-                url: url + 'adicionarMovimento'
+                url: url + 'inserirOuAtualizar'
             }
         });
     }]);

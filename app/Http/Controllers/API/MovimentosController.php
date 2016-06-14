@@ -54,13 +54,13 @@ class MovimentosController extends Controller
         $this->repository->alterarStatusFavorito($id, $idUsuario);
     }
 
-    public function adicionarMovimento(Request $request)
+    public function inserirOuAtualizar(Request $request)
     {
         $idUsuario = Authorizer::getResourceOwnerId();
 
         $data = $request->all();
         $data['user_id'] = $idUsuario;
 
-        return $this->repository->create($data);
+        return $this->repository->updateOrCreate(['id' => $data['id']], $data);
     }
 }

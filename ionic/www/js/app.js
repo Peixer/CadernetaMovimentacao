@@ -26,7 +26,7 @@ angular.module('starter', [
         baseUrl: 'http://localhost:8000',
         //baseUrl: 'http://caderneta.peixer.com/',
         direcionarAposLogin: {
-            usuario: 'usuario.movimento'
+            usuario: 'usuario.movimentos'
         }
     })
 
@@ -44,15 +44,15 @@ angular.module('starter', [
                 templateUrl: 'templates/menu.html',
                 controller: 'UsuarioMenuCtrl'
             })
-            .state('usuario.movimento', {
-                url: '/movimento',
+            .state('usuario.movimentos', {
+                url: '/movimentos',
                 templateUrl: 'templates/movimentos/movimentos.html',
                 controller: 'MovimentoCtrl'
             })
             .state('usuario.inclusaoMovimento', {
-                url: '/movimento/inclusao',
-                templateUrl: 'templates/movimentos/inclusao.html',
-                controller: 'InclusaoMovimentoCtrl'
+                url: '/movimentos/inclusao',
+                templateUrl: 'templates/movimentos/incluir.html',
+                controller: 'IncluirMovimentoCtrl'
             })
             .state('usuario.historico', {
                 url: '/historico',

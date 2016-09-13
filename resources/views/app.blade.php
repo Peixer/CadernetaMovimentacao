@@ -99,17 +99,13 @@
 
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
+        <div style="padding-top: 10px;">
         <button class="ui circular facebook icon button"
                 onclick="window.open('https://apps.facebook.com/caderneta/?fb_source=search')">
             <i class="facebook icon"></i>
         </button>
-        <button class="ui circular twitter icon button">
-            <i class="twitter icon"></i>
-        </button>
-        <button class="ui circular linkedin icon button">
-            <i class="linkedin icon"></i>
-        </button>
-        <button class="ui circular google plus icon button">
+        <button class="ui circular google plus icon button"
+                onclick="window.open('https://plus.google.com/u/0/102769786606462720843')">
             <i class="google plus icon"></i>
         </button>
         <div class="ui inverted section divider"></div>

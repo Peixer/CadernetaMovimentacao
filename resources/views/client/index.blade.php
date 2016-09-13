@@ -28,7 +28,6 @@
                 <tr>
                     <th>Início</th>
                     <th>Descrição</th>
-                    <th>Tipo</th>
                     <th>Total</th>
                     <th>Ação</th>
                 </tr>
@@ -39,7 +38,6 @@
                     <tr class="itemTable" data-movimentacao="{{$movimentacao}}">
                         <td><i class="money icon"></i>{{ $movimentacao->getDateFormated()}}</td>
                         <td>{{$movimentacao->descricao}}</td>
-                        <td>{{$movimentacao->getTipoCobranca()}}</td>
                         <td>{{$movimentacao->total}}</td>
                         <td>
                             <a href="{{ route('client.destroy',['id' =>$movimentacao->id]) }}"

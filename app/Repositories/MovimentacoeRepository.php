@@ -10,6 +10,8 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface MovimentacoeRepository extends RepositoryInterface
 {
+    function getHistoric($id, $mes);
+    function getReport($request, $id);
     function deletarMovimento($idMovimento, $idUsuario);
     function alterarStatusFavorito($idMovimento, $idUsuario);
 }

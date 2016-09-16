@@ -2,12 +2,11 @@
 
 namespace Caderneta\Repositories;
 
+use Caderneta\Models\Movimentacoe;
 use Caderneta\Presenters\MovimentacaoPresenter;
 use Carbon\Carbon;
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Caderneta\Repositories\MovimentacoeRepository;
-use Caderneta\Models\Movimentacoe;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class MovimentacoeRepositoryEloquent
@@ -74,7 +73,6 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
 
         return $result;
     }
-
 
     public function deletarMovimento($idMovimento, $idUsuario)
     {

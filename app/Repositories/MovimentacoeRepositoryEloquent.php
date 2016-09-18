@@ -3,7 +3,6 @@
 namespace Caderneta\Repositories;
 
 use Caderneta\Models\Movimentacoe;
-use Caderneta\Presenters\MovimentacaoPresenter;
 use Carbon\Carbon;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -28,7 +27,8 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
 
     public function presenter()
     {
-        return MovimentacaoPresenter::class;
+//        return MovimentacaoPresenter::class;
+        return null;
     }
 
     public function getHistoric($id, $mes)
@@ -50,7 +50,6 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
 
     public function getReport($request, $id)
     {
-        $result = [];
         $endDate = Carbon::createFromFormat("d/m/Y", $request['end'])->toDateString();
         $startDate = Carbon::createFromFormat("d/m/Y", $request['start'])->toDateString();
         $tags = $request['tags'];
@@ -58,20 +57,7 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
         $movimentacoes = $this->model->where('user_id', $id)
             ->whereBetween('data', [$startDate, $endDate])->get();
 
-        foreach ($movimentacoes as $movimento) {
-            foreach ($tags as $tag) {
-                $tag = str_replace('#', '', $tag);
-
-                if (str_contains(strtolower($movimento->descricao), strtolower($tag))) {
-                    if (array_key_exists($tag, $result))
-                        array_push($result[$tag], $movimento);
-                    else
-                        $result = array_add($result, $tag, array($movimento));
-                }
-            }
-        }
-
-        return $result;
+        return $this->obterMovimentacoesRelacionadasTags($movimentacoes, $tags);;
     }
 
     public function deletarMovimento($idMovimento, $idUsuario)
@@ -100,5 +86,41 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * @param $movimentacoes
+     * @param $tags
+     * @param $resultado
+     * @return array
+     */
+    private function obterMovimentacoesRelacionadasTags($movimentacoes, $tags)
+    {
+        $resultado = [];
+
+        if (empty($tags)) {
+            if ($movimentacoes == null)
+                return array();
+
+            return $movimentacoes;
+        }
+
+        foreach ($movimentacoes as $movimento) {
+            foreach ($tags as $tag) {
+
+                $tag = str_replace('#', '', $tag);
+                $descricaoMaiusculo = strtolower($movimento->descricao);
+                $tagMaiusculo = strtolower($tag);
+
+                if (str_contains($descricaoMaiusculo, $tagMaiusculo)) {
+                    if (array_key_exists($tag, $resultado))
+                        array_push($resultado[$tag], $movimento);
+                    else
+                        $resultado = array_add($resultado, $tag, array($movimento));
+                }
+            }
+        }
+
+        return $resultado;
     }
 }

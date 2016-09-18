@@ -1,25 +1,15 @@
 <?php
 
 use Caderneta\Repositories\MovimentacoeRepositoryEloquent;
-use Carbon\Carbon;
 
 class MovimentacoesRepositoryTest extends TestCase
 {
-    public function __construct()
-    {
-//        $this->model = $this->getMockBuilder('Caderneta\Models\Movimentacoe')->getMock();
-    }
-
     public function test_gerando_relatorio_vazio_quando_usuario_nao_existir()
     {
-        $application = new \Illuminate\Container\Container();
-
+        $application = App::make('Illuminate\Foundation\Application');
         $movimentacoes = new MovimentacoeRepositoryEloquent($application);
-        $request = new \Illuminate\Http\Request();
 
-        $request['start'] = Carbon::createFromDate(2016, 9, 15)->format("d/m/Y");
-        $request['end'] = Carbon::createFromDate(2016, 9, 20)->format("d/m/Y");
-        $request['tags'] = array();
+        $request = $this->obter_request('15/09/2016', '20/09/2016');
         $userId = 99;
 
         $resultado = $movimentacoes->getReport($request, $userId);
@@ -32,22 +22,26 @@ class MovimentacoesRepositoryTest extends TestCase
     {
         $modelFake = $this->obter_movimentacao_fake();
         $application = $this->obter_instancia_de_aplication_mockada($modelFake);
-
         $movimentacoes = new MovimentacoeRepositoryEloquent($application);
-        $request = new \Illuminate\Http\Request();
 
-        $request['start'] = Carbon::createFromDate(2016, 9, 15)->format("d/m/Y");
-        $request['end'] = Carbon::createFromDate(2016, 9, 20)->format("d/m/Y");
-        $request['tags'] = array();
-
+        $request = $this->obter_request('15/09/2016', '20/09/2016');
         $userId = 1;
 
         $resultado = $movimentacoes->getReport($request, $userId);
 
-        Log::info("test_gerando_filtro_do_relatorio - Valor do RESULTADO: " . implode(" ", $resultado));
-
         $this->assertNotNull($resultado);
         $this->assertEquals(array($modelFake), $resultado);
+    }
+
+    private function obter_request($dataInicio, $dataFim, $tags = array())
+    {
+        $request = new \Illuminate\Http\Request();
+
+        $request['start'] = $dataInicio;
+        $request['end'] = $dataFim;
+        $request['tags'] = $tags;
+
+        return $request;
     }
 
     private function obter_movimentacao_fake()
@@ -59,19 +53,21 @@ class MovimentacoesRepositoryTest extends TestCase
         ]);
     }
 
-    private function obter_instancia_de_aplication_mockada($modelFake)
+    private function obter_instancia_de_aplication_mockada($modelEsperado)
     {
         $application = Mockery::mock('Illuminate\Foundation\Application');
 
         $model = Mockery::mock('Caderneta\Models\Movimentacoe');
+        $modelPresenter = Mockery::mock('Caderneta\Presenters\MovimentacaoPresenter');
         $stubQuery = \Mockery::mock('Illuminate\Database\Eloquent\Builder');
         $stubQuery2 = \Mockery::mock('Illuminate\Database\Query\Builder');
 
         $model->shouldReceive('where')->once()->andReturn($stubQuery);
         $stubQuery->shouldReceive('whereBetween')->once()->andReturn($stubQuery2);
-        $stubQuery2->shouldReceive('get')->andReturn(array($modelFake));
+        $stubQuery2->shouldReceive('get')->andReturn(array($modelEsperado));
 
         $application->shouldReceive('make')->once()->with('Caderneta\Models\Movimentacoe')->andReturn($model);
+        $application->shouldReceive('make')->once()->with('Caderneta\Presenters\MovimentacaoPresenter')->andReturn($modelPresenter);
 
         return $application;
     }

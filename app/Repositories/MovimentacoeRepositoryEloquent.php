@@ -27,8 +27,7 @@ class MovimentacoeRepositoryEloquent extends BaseRepository implements Movimenta
 
     public function presenter()
     {
-//        return MovimentacaoPresenter::class;
-        return null;
+        return \Caderneta\Presenters\MovimentacaoPresenter::class;
     }
 
     public function getHistoric($id, $mes)
